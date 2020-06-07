@@ -1,13 +1,19 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, withRouter } from 'react-router';
+import Header from './components/Header';
+
+
 
 const Routes = () => {
 
     return(
         <Switch>
+            <Route path="/">
+                <Header/>
+            </Route>
         </Switch>
     );
 }
 
 
-export default Routes;
+export default withRouter(Routes);
