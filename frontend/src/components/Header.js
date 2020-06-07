@@ -1,9 +1,9 @@
 import React from 'react';
 import {AppBar, Grid, IconButton, Tooltip} from '@material-ui/core';
 import {ExitToAppOutlined} from '@material-ui/icons';
-import {makeStyles} from '@material-ui/styles'
+import {makeStyles} from '@material-ui/styles';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     icon: {
       color: "white",
       scale: 1.2
@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
 
 const Header = () => {
 
-      const classes = useStyles();
+    const classes = useStyles();
     
     return(
         <AppBar>
