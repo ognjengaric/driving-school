@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,6 +26,9 @@ public class User implements UserDetails {
 
     @Column
     private String image;
+
+    @Column
+    private  Timestamp lastPasswordResetDate;
 
     @ManyToMany
     private List<Role> roles;
@@ -71,6 +75,14 @@ public class User implements UserDetails {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Timestamp getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     @Override
