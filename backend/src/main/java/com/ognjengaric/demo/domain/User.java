@@ -3,7 +3,7 @@ package com.ognjengaric.demo.domain;
 import javax.persistence.*;
 
 @Table
-public class Person {
+public class User {
 
     @Id
     private long id;
@@ -20,7 +20,7 @@ public class Person {
     @Column
     private String image;
 
-    public Person() {
+    public User() {
     }
 
     public long getId() {

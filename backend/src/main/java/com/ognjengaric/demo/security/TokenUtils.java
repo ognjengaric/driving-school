@@ -22,5 +22,5 @@ public class TokenUtils {
     static final String AUDIENCE_WEB = "web";
 
     private SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
-    
+
 }
