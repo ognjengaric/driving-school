@@ -38,10 +38,10 @@ public class TokenUtils {
         }
     }
 
-    public String generateToken(String email) {
+    public String generateToken(String userId) {
         return Jwts.builder()
                 .setIssuer(APP_NAME)
-                .setSubject(email)
+                .setSubject(userId)
                 .setAudience(generateAudience())
                 .setIssuedAt(timeProvider.now())
                 .setExpiration(generateExpirationDate())
