@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @Column
     private  Timestamp lastPasswordResetDate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
     public User() {

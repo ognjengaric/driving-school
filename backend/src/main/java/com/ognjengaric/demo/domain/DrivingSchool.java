@@ -11,7 +11,7 @@ import java.util.List;
 public class DrivingSchool {
 
     @Id
-    private long id;
+    private String id;
 
     @Column
     private String name;
@@ -26,11 +26,11 @@ public class DrivingSchool {
         this.availableCategories = new ArrayList<>();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

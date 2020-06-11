@@ -34,4 +34,9 @@ public class TokenBasedAuthentication extends AbstractAuthenticationToken {
     public Object getPrincipal() {
         return principle;
     }
+
+    @Override
+    public boolean isAuthenticated() {
+        return true;
+    }
 }
