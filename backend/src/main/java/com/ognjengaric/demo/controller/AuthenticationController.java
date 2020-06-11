@@ -1,7 +1,9 @@
 package com.ognjengaric.demo.controller;
 
+import com.ognjengaric.demo.domain.Role;
 import com.ognjengaric.demo.domain.User;
 import com.ognjengaric.demo.dto.LoginDTO;
+import com.ognjengaric.demo.dto.TokenRoleDTO;
 import com.ognjengaric.demo.security.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,7 +46,8 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().build();
 
         String jwt = tokenUtils.generateToken(user.getId());
+        String role = ((Role)user.getAuthorities().toArray()[0]).getAuthority();
 
-        return ResponseEntity.ok(jwt);
+        return ResponseEntity.ok(new TokenRoleDTO(jwt, role));
     }
 }
