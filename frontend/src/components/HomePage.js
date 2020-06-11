@@ -24,7 +24,6 @@ const HomePage = () => {
     const handleClose = () => setShow(false);
 
     useEffect(() => {
-      console.log(location)
       if(location.state)
         if(location.state.prev === 'login')
           setShow(true)

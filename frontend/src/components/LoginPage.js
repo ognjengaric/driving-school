@@ -38,10 +38,10 @@ const LoginPage = () => {
             if (!response.ok) {
                 return Promise.reject(response);
             }
-            return response.text();
+            return response.json();
         })
-        .then(token => {
-            localStorage.setItem('token', token);
+        .then(data => {
+            localStorage.setItem('auth', JSON.stringify(data));
             history.push("/home", {prev: 'login'});
         })
         .catch(response => {
@@ -79,7 +79,8 @@ const LoginPage = () => {
                         variant="outlined"
                         className={classes.margin}     
                         name="password"
-                        onChange={handleChange}         
+                        onChange={handleChange}      
+                        type="password"   
                     />
                     <br/>
                     <Button

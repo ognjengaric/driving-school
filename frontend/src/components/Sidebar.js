@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Drawer, List, ListItem, ListItemText, ListItemIcon} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
-import {InboxRounded} from '@material-ui/icons';
+import {SchoolRounded, AccountBoxRounded, DirectionsCarRounded, TrafficRounded, CalendarTodayRounded, BookRounded, ScheduleRounded, AssessmentRounded} from '@material-ui/icons';
 
 const useStyles = makeStyles({
     list: {
@@ -15,6 +15,29 @@ const useStyles = makeStyles({
 const Sidebar = ({open, handleChange}) => {
     const anchor = "left";
     const classes = useStyles();
+    const [displayList, setDisplayList] = useState([]);
+
+    const adminList = [{title: "Driving school", icon: <SchoolRounded/>}, {title: "Users", icon: <AccountBoxRounded/>}, {title: "Routes", icon: <DirectionsCarRounded/>}, {title: "Streets", icon: <TrafficRounded/>}]
+    const instructorList = [{title: "Calendar", icon: <CalendarTodayRounded/>}, {title: "Classes", icon: <BookRounded/>}, {title: "Candidates", icon: <AccountBoxRounded/>}]
+    const candidateList = [{title: "Scheduling", icon: <ScheduleRounded/>}, {title: "Classes", icon: <BookRounded/>}, {title: "Course progress", icon: <AssessmentRounded/>}]
+
+    useEffect(() => {
+      const auth = JSON.parse(localStorage.getItem('auth'));
+
+      if(!auth)
+        return;
+
+      if(auth.role.toLowerCase().includes('admin'))
+        setDisplayList(adminList);
+
+      if(auth.role.toLowerCase().includes('instructor'))
+        setDisplayList(instructorList);
+
+      if(auth.role.toLowerCase().includes('candidate'))
+        setDisplayList(candidateList);
+        
+    // eslint-disable-next-line
+    }, []);
 
     const list = (anchor) => (
         <div
@@ -22,10 +45,10 @@ const Sidebar = ({open, handleChange}) => {
           role="presentation"
         >
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon><InboxRounded/></ListItemIcon>
-                <ListItemText primary={text} />
+            {displayList.map((el) => (
+              <ListItem button key={el.title}>
+                <ListItemIcon>{el.icon}</ListItemIcon>
+                <ListItemText primary={el.title} />
               </ListItem>
             ))}
           </List>
