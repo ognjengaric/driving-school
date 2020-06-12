@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Drawer, List, ListItem, ListItemText, ListItemIcon} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import {SchoolRounded, AccountBoxRounded, DirectionsCarRounded, TrafficRounded, CalendarTodayRounded, BookRounded, ScheduleRounded, AssessmentRounded} from '@material-ui/icons';
+import {serviceConfig} from '../appSettings.js';
+import AlertDialog from './AlertDialog';
 
 const useStyles = makeStyles({
     list: {
@@ -16,8 +18,10 @@ const Sidebar = ({open, handleChange}) => {
     const anchor = "left";
     const classes = useStyles();
     const [displayList, setDisplayList] = useState([]);
+    const [exists, setExists] = useState(true);
+    const [show, setShow] = useState(false);
 
-    const adminList = [{title: "Driving school", icon: <SchoolRounded/>}, {title: "Users", icon: <AccountBoxRounded/>}, {title: "Routes", icon: <DirectionsCarRounded/>}, {title: "Streets", icon: <TrafficRounded/>}]
+    const adminList = [{title: "Driving school", icon: <SchoolRounded/>, path:'drivingSchool'}, {title: "Users", icon: <AccountBoxRounded/>}, {title: "Routes", icon: <DirectionsCarRounded/>}, {title: "Streets", icon: <TrafficRounded/>}]
     const instructorList = [{title: "Calendar", icon: <CalendarTodayRounded/>}, {title: "Classes", icon: <BookRounded/>}, {title: "Candidates", icon: <AccountBoxRounded/>}]
     const candidateList = [{title: "Scheduling", icon: <ScheduleRounded/>}, {title: "Classes", icon: <BookRounded/>}, {title: "Course progress", icon: <AssessmentRounded/>}]
 
@@ -27,8 +31,10 @@ const Sidebar = ({open, handleChange}) => {
       if(!auth)
         return;
 
-      if(auth.role.toLowerCase().includes('admin'))
+      if(auth.role.toLowerCase().includes('admin')){
         setDisplayList(adminList);
+        checkIfSchoolExists();
+      }
 
       if(auth.role.toLowerCase().includes('instructor'))
         setDisplayList(instructorList);
@@ -39,14 +45,42 @@ const Sidebar = ({open, handleChange}) => {
     // eslint-disable-next-line
     }, []);
 
-    const list = (anchor) => (
+    const checkIfSchoolExists = () => {
+      
+      const auth = JSON.parse(localStorage.getItem('auth'));
+
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${auth.token}` ,
+        }
+      }
+
+      fetch(`${serviceConfig.baseURL}/drivingSchool/exists`, requestOptions)
+        .then(response => {
+          if (!response.ok) {
+              return Promise.reject(response);
+          }
+      })
+      .catch(response => {
+        if(response.status === 400)
+          setExists(false);
+      })
+    }
+
+    const handleClick = (path) => {
+        if(path === 'drivingSchool' && !exists)
+          setShow(true);
+    }
+
+    const list = () => (
         <div
           className={classes.list}
           role="presentation"
         >
           <List>
             {displayList.map((el) => (
-              <ListItem button key={el.title}>
+              <ListItem button key={el.title} onClick={() => handleClick(el.path)}>
                 <ListItemIcon>{el.icon}</ListItemIcon>
                 <ListItemText primary={el.title} />
               </ListItem>
@@ -60,6 +94,7 @@ const Sidebar = ({open, handleChange}) => {
           <Drawer open={open} variant="temporary" anchor={anchor} onClose={(e) => handleChange(e, false)}>
             {list(anchor)}
           </Drawer>
+          <AlertDialog show={show} handleDisagree={() => setShow(false)}/>
         </div>
     );
 }
