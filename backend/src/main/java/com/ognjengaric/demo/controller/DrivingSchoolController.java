@@ -44,4 +44,12 @@ public class DrivingSchoolController {
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping("/exists")
+    public ResponseEntity existsDrivingSchool(){
+        if(drivingSchoolService.count() == 1)
+            return ResponseEntity.ok().build();
+        else
+            return ResponseEntity.badRequest().build();
+    }
+
 }
