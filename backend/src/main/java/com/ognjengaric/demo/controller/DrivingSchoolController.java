@@ -14,6 +14,7 @@ import java.net.URI;
 @RequestMapping("/drivingSchool")
 public class DrivingSchoolController {
 
+
     @Value("${backend_uri}")
     private String backendUri;
 

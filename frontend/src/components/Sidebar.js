@@ -4,6 +4,8 @@ import {makeStyles} from '@material-ui/styles';
 import {SchoolRounded, AccountBoxRounded, DirectionsCarRounded, TrafficRounded, CalendarTodayRounded, BookRounded, ScheduleRounded, AssessmentRounded} from '@material-ui/icons';
 import {serviceConfig} from '../appSettings.js';
 import AlertDialog from './AlertDialog';
+import DrivingSchoolForm from './DrivingSchoolForm';
+import CustomAlert from './CustomAlert';
 
 const useStyles = makeStyles({
     list: {
@@ -20,6 +22,8 @@ const Sidebar = ({open, handleChange}) => {
     const [displayList, setDisplayList] = useState([]);
     const [exists, setExists] = useState(true);
     const [show, setShow] = useState(false);
+    const [showForm, setShowForm] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
 
     const adminList = [{title: "Driving school", icon: <SchoolRounded/>, path:'drivingSchool'}, {title: "Users", icon: <AccountBoxRounded/>}, {title: "Routes", icon: <DirectionsCarRounded/>}, {title: "Streets", icon: <TrafficRounded/>}]
     const instructorList = [{title: "Calendar", icon: <CalendarTodayRounded/>}, {title: "Classes", icon: <BookRounded/>}, {title: "Candidates", icon: <AccountBoxRounded/>}]
@@ -73,6 +77,11 @@ const Sidebar = ({open, handleChange}) => {
           setShow(true);
     }
 
+    const handleAgree = () => {
+      setShowForm(true);
+      setShow(false);
+    }
+
     const list = () => (
         <div
           className={classes.list}
@@ -94,7 +103,9 @@ const Sidebar = ({open, handleChange}) => {
           <Drawer open={open} variant="temporary" anchor={anchor} onClose={(e) => handleChange(e, false)}>
             {list(anchor)}
           </Drawer>
-          <AlertDialog show={show} handleDisagree={() => setShow(false)}/>
+          <AlertDialog show={show} handleDisagree={() => setShow(false)} handleAgree={handleAgree}/>
+          <DrivingSchoolForm showDialog={showForm} handleClose={() => setShowForm(false)} showAlert={() => setShowAlert(true)}/>
+          <CustomAlert severity={'success'} message={"Successfully added!"} show={showAlert} handleClose={() => setShowAlert(false)}/>
         </div>
     );
 }

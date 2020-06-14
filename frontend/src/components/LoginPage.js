@@ -70,10 +70,12 @@ const LoginPage = () => {
                         variant="outlined"
                         className={classes.margin}
                         name="userId"
-                        onChange={handleChange}         
+                        onChange={handleChange}     
+                        required    
                     />
                     <br/>
                     <TextField 
+                        required
                         size="medium"
                         label="Password" 
                         variant="outlined"
