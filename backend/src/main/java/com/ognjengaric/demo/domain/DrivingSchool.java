@@ -1,20 +1,17 @@
 package com.ognjengaric.demo.domain;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.ognjengaric.demo.enums.CategoryType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Table
+@Entity
 public class DrivingSchool {
 
     @Id
-    private long id;
+    private String id;
 
     @Column
     private String name;
@@ -29,11 +26,11 @@ public class DrivingSchool {
         this.availableCategories = new ArrayList<>();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

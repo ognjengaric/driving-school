@@ -1,7 +1,8 @@
 import React from 'react';
 import { Switch, Route, withRouter } from 'react-router';
-import Header from './components/Header';
 import LoginPage from './components/LoginPage';
+import HomePage from './components/HomePage';
+
 
 
 
@@ -11,7 +12,7 @@ const Routes = () => {
         <Switch>
             <Route exact path="/" component={LoginPage}/>
             <Route path="/home">
-                <Header/>
+                <HomePage/>
             </Route>
         </Switch>
     );
