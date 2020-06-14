@@ -104,7 +104,7 @@ const Sidebar = ({open, handleChange}) => {
             {list(anchor)}
           </Drawer>
           <AlertDialog show={show} handleDisagree={() => setShow(false)} handleAgree={handleAgree}/>
-          <DrivingSchoolForm showDialog={showForm} handleClose={() => setShowForm(false)} showAlert={() => setShowAlert(true)}/>
+          <DrivingSchoolForm showDialog={showForm} handleClose={() => setShowForm(false)} showAlert={() => setShowForm(true)}/>
           <CustomAlert severity={'success'} message={"Successfully added!"} show={showAlert} handleClose={() => setShowAlert(false)}/>
         </div>
     );
