@@ -89,7 +89,7 @@ export default function FullScreenDialog({showDialog, handleClose, showAlert}) {
         <form onSubmit={handleSubmit}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="close">
+            <IconButton edge="start" color="inherit" aria-label="close" onClick={handleClose}>
               <CloseIcon/>
             </IconButton>
             <Typography variant="h6" className={classes.title}>
