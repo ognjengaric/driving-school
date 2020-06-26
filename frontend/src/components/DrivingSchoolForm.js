@@ -71,7 +71,7 @@ export default function FullScreenDialog({showDialog, handleClose, showAlert}) {
       body: JSON.stringify(body)
     }
 
-    fetch(`${serviceConfig.baseURL}/drivingSchool`, requestOptions)
+    fetch(`${serviceConfig.baseURL}/driving-school`, requestOptions)
     .then(response => {
         if (!response.ok) {
             return Promise.reject(response);

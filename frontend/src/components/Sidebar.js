@@ -60,7 +60,7 @@ const Sidebar = ({open, handleChange}) => {
         }
       }
 
-      fetch(`${serviceConfig.baseURL}/drivingSchool/exists`, requestOptions)
+      fetch(`${serviceConfig.baseURL}/driving-school/exists`, requestOptions)
         .then(response => {
           if (!response.ok) {
               return Promise.reject(response);

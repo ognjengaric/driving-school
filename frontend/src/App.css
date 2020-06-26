@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.map {
+  position:relative;
+  width:calc(75% - 200px);
+  height:75%;
+  float:left;
+}
+
+.directionsContainer {
+  width: auto;
+  height:75%;
+  overflow-y:auto;
+  float:left;
+}
+
+
+
