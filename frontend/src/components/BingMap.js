@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {Microsoft, loadBingApi} from '../bingMapService.ts';
 import {serviceConfig} from '../appSettings.js'
 import {Card, makeStyles} from '@material-ui/core'
@@ -16,6 +16,12 @@ let directionsManager= {}
 const BingMap = ({mapOptions}) => {
   const mapRef = useRef();
   const classes = useStyles();
+  const [state, setState] = useState({
+    routePath: [],
+    time: 0,
+    distance: 0,
+    streets: []
+  })
 
   const initMap = () => {
     const map = new Microsoft.Maps.Map(mapRef.current);
@@ -50,17 +56,22 @@ const BingMap = ({mapOptions}) => {
   const directionsUpdated = (e) => {
     let route = directionsManager.getCurrentRoute()
     let streets = []
+    let [time, distance] = [0, 0];
 
     route.routeLegs.forEach(leg => {
+      distance += leg.summary.distance;
+      time += leg.summary.time;
+
       leg.itineraryItems.forEach(action => {
           let street = parseStreet(action.formattedText);
           if(street !== "")
             streets.push(street);
         });
     });
-
-      console.log(route)
-      console.log(streets)
+    
+    streets = [...new Set(streets)]    
+    
+    setState({time, distance, routePath: route.routePath, streets});
   }
 
   const parseStreet = (action) => {   
@@ -71,6 +82,12 @@ const BingMap = ({mapOptions}) => {
     if(i !== -1 || j !== -1)
       street = action.substring(i+10, j)
 
+    let parts = street.split(' / ')
+
+    if(parts.length !== 1){
+      street = parts.reduce((a, b) => a.length > b.length ? a : b)
+    }
+
     return street;
   }
 
@@ -79,7 +96,7 @@ const BingMap = ({mapOptions}) => {
       <div className="directionsContainer">
         <Card className={classes.card} variant="outlined">
           <div id="directionsPanel"></div>
-          <TrafficRouteForm/>
+          <TrafficRouteForm routeInfo={state} manager={directionsManager}/>
         </Card>
       </div>  
       <div ref={mapRef} className="map" />
