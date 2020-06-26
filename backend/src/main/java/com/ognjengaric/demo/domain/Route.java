@@ -1,5 +1,7 @@
 package com.ognjengaric.demo.domain;
 
+import com.ognjengaric.demo.enums.CategoryType;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,9 @@ public class Route {
     @Id
     @GeneratedValue
     private Integer id;
+
+    @Column
+    private CategoryType categoryType;
 
     @ElementCollection
     private List<Point> points = new ArrayList<>();
@@ -29,6 +34,14 @@ public class Route {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public CategoryType getCategoryType() {
+        return categoryType;
+    }
+
+    public void setCategoryType(CategoryType categoryType) {
+        this.categoryType = categoryType;
     }
 
     public List<Point> getPoints() {

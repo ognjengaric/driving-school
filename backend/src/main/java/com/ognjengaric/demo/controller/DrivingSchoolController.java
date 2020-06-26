@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/drivingSchool")
+@RequestMapping("/driving-school")
 public class DrivingSchoolController {
 
 
@@ -49,6 +49,16 @@ public class DrivingSchoolController {
     public ResponseEntity existsDrivingSchool(){
         if(drivingSchoolService.count() == 1)
             return ResponseEntity.ok().build();
+        else
+            return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity getSchoolCategories(){
+        DrivingSchool drivingSchool = drivingSchoolService.getSchool();
+
+        if(drivingSchool != null)
+            return ResponseEntity.ok(drivingSchool.getAvailableCategories());
         else
             return ResponseEntity.badRequest().build();
     }
