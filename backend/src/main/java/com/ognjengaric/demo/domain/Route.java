@@ -17,7 +17,7 @@ public class Route {
     private CategoryType categoryType;
 
     @ElementCollection
-    private List<Point> points = new ArrayList<>();
+    private List<Point> routePath = new ArrayList<>();
 
     @Column
     private int time;
@@ -44,12 +44,12 @@ public class Route {
         this.categoryType = categoryType;
     }
 
-    public List<Point> getPoints() {
-        return points;
+    public List<Point> getRoutePath() {
+        return routePath;
     }
 
-    public void setPoints(List<Point> points) {
-        this.points = points;
+    public void setRoutePath(List<Point> routePath) {
+        this.routePath = routePath;
     }
 
     public int getTime() {
