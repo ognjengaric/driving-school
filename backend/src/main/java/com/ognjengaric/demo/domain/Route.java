@@ -1,16 +1,18 @@
 package com.ognjengaric.demo.domain;
 
+import com.ognjengaric.demo.dto.NewRouteDTO;
 import com.ognjengaric.demo.enums.CategoryType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Route {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -19,6 +21,9 @@ public class Route {
     @ElementCollection
     private List<Point> routePath = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Street> streets = new ArrayList<>();
+
     @Column
     private int time;
 
@@ -26,6 +31,14 @@ public class Route {
     private  int distance;
 
     public Route() {
+    }
+
+    public Route(NewRouteDTO newRouteDTO){
+        this.categoryType = newRouteDTO.getCategory();
+        this.time = newRouteDTO.getTime();
+        this.distance = newRouteDTO.getDistance();
+        this.routePath = newRouteDTO.getRoutePath();
+        this.streets = newRouteDTO.getStreets().stream().map(Street::new).collect(Collectors.toList());
     }
 
     public Integer getId() {
@@ -50,6 +63,14 @@ public class Route {
 
     public void setRoutePath(List<Point> routePath) {
         this.routePath = routePath;
+    }
+
+    public List<Street> getStreets() {
+        return streets;
+    }
+
+    public void setStreets(List<Street> streets) {
+        this.streets = streets;
     }
 
     public int getTime() {

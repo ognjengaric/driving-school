@@ -22,7 +22,7 @@ public class DrivingSchoolController {
     DrivingSchoolService drivingSchoolService;
 
     @GetMapping("/{id}")
-    public ResponseEntity getDrivingSchool(@PathVariable String id){
+    public ResponseEntity<?> getDrivingSchool(@PathVariable String id){
         DrivingSchool drivingSchool = drivingSchoolService.findById(id);
 
         if(drivingSchool == null)
@@ -33,7 +33,7 @@ public class DrivingSchoolController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity postDrivingSchool(@RequestBody DrivingSchool drivingSchool){
+    public ResponseEntity<?> postDrivingSchool(@RequestBody DrivingSchool drivingSchool){
 
         if(drivingSchoolService.count() != 0)
             return ResponseEntity.badRequest().build();
@@ -46,7 +46,7 @@ public class DrivingSchoolController {
     }
 
     @GetMapping("/exists")
-    public ResponseEntity existsDrivingSchool(){
+    public ResponseEntity<?> existsDrivingSchool(){
         if(drivingSchoolService.count() == 1)
             return ResponseEntity.ok().build();
         else
@@ -54,7 +54,7 @@ public class DrivingSchoolController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity getSchoolCategories(){
+    public ResponseEntity<?> getSchoolCategories(){
         DrivingSchool drivingSchool = drivingSchoolService.getSchool();
 
         if(drivingSchool != null)
