@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     }, 
   }));
 
-const TrafficRouteForm = ({routeInfo, manager}) => {
+const TrafficRouteForm = ({routeInfo}) => {
     const classes = useStyles();
     const [category, setCategory] = useState('');
     const [categories, setCategories] = useState([]);
@@ -71,7 +71,6 @@ const TrafficRouteForm = ({routeInfo, manager}) => {
                 return Promise.reject(response);
             }
             setShow(true);
-            manager.clearAll();
         })
     }
 

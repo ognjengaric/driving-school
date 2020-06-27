@@ -45,7 +45,7 @@ const BingMap = ({mapOptions}) => {
     Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
       //Create an instance of the directions manager.
       directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-
+      directionsManager.setRequestOptions({maxRoutes: 1});
       //Specify the where to display the input panel
       directionsManager.showInputPanel('directionsPanel');
 
