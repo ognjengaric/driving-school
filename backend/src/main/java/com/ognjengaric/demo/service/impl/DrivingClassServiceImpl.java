@@ -4,6 +4,7 @@ import com.ognjengaric.demo.domain.Candidate;
 import com.ognjengaric.demo.domain.DrivingClass;
 import com.ognjengaric.demo.domain.Instructor;
 import com.ognjengaric.demo.domain.User;
+import com.ognjengaric.demo.dto.AppointmentDTO;
 import com.ognjengaric.demo.repository.DrivingClassRepository;
 import com.ognjengaric.demo.service.DrivingClassService;
 import com.ognjengaric.demo.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DrivingClassServiceImpl implements DrivingClassService {
@@ -28,7 +30,7 @@ public class DrivingClassServiceImpl implements DrivingClassService {
     }
 
     @Override
-    public List<DrivingClass> getClassesForUserScheduler(String user_id){
+    public List<AppointmentDTO> getClassesForUserScheduler(String user_id){
         User user = userService.findById(user_id);
         Instructor instructor;
 
@@ -38,6 +40,9 @@ public class DrivingClassServiceImpl implements DrivingClassService {
             return null;
         }
 
-        return findByInstructor(instructor);
+        return findByInstructor(instructor)
+                .stream()
+                .map(AppointmentDTO::new)
+                .collect(Collectors.toList());
     }
 }

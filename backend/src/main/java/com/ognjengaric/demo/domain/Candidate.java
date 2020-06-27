@@ -13,7 +13,7 @@ public class Candidate extends User{
     @Column
     private CategoryType currentLicence;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Instructor instructor;
 
     @ElementCollection

@@ -1,11 +1,7 @@
 package com.ognjengaric.demo.controller;
 
-import com.ognjengaric.demo.domain.Candidate;
-import com.ognjengaric.demo.domain.DrivingClass;
-import com.ognjengaric.demo.domain.Instructor;
-import com.ognjengaric.demo.domain.User;
+import com.ognjengaric.demo.dto.AppointmentDTO;
 import com.ognjengaric.demo.service.DrivingClassService;
-import com.ognjengaric.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +21,12 @@ public class DrivingClassController {
     @GetMapping("/appointments")
     public ResponseEntity<?> getClassesForUserScheduler(Principal principal){
 
-        List<DrivingClass> drivingClasses = drivingClassService.getClassesForUserScheduler(principal.getName());
+        List<AppointmentDTO> drivingClasses = drivingClassService.getClassesForUserScheduler(principal.getName());
 
         if(drivingClasses == null)
             return ResponseEntity.badRequest().build();
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(drivingClasses);
     }
 
 }
