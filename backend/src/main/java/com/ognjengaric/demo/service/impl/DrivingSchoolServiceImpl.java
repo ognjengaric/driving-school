@@ -6,6 +6,8 @@ import com.ognjengaric.demo.service.DrivingSchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 @Service
 public class DrivingSchoolServiceImpl implements DrivingSchoolService {
 
@@ -24,6 +26,12 @@ public class DrivingSchoolServiceImpl implements DrivingSchoolService {
 
     @Override
     public void save(DrivingSchool drivingSchool){
+        Collections.sort(drivingSchool.getAvailableCategories());
         drivingSchoolRepository.save(drivingSchool);
+    }
+
+    @Override
+    public DrivingSchool getSchool() {
+        return drivingSchoolRepository.findFirstByOrderById().orElse(null);
     }
 }

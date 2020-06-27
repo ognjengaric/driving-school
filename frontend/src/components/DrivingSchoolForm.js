@@ -24,7 +24,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog({showDialog, handleClose, showAlert}) {
+export default function FullScreenDialog({showDialog, handleClose, showAlert, check}) {
   const categories = ['AM', 'A1', 'A2', 'A', 'B1', 'B', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'F', 'M'];
   const classes = useStyles();
   const [state, setState] = useState({
@@ -71,11 +71,12 @@ export default function FullScreenDialog({showDialog, handleClose, showAlert}) {
       body: JSON.stringify(body)
     }
 
-    fetch(`${serviceConfig.baseURL}/drivingSchool`, requestOptions)
+    fetch(`${serviceConfig.baseURL}/driving-school`, requestOptions)
     .then(response => {
         if (!response.ok) {
             return Promise.reject(response);
         } 
+        check();
         showAlert();
         handleClose();
     })

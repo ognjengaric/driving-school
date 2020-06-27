@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface DrivingSchoolRepository extends JpaRepository<DrivingSchool, String> {
     Optional<DrivingSchool> findById(String id);
+    Optional<DrivingSchool> findFirstByOrderById();
 }

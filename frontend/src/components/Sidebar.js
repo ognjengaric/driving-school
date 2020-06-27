@@ -6,6 +6,7 @@ import {serviceConfig} from '../appSettings.js';
 import AlertDialog from './AlertDialog';
 import DrivingSchoolForm from './DrivingSchoolForm';
 import CustomAlert from './CustomAlert';
+import {useHistory} from "react-router";
 
 const useStyles = makeStyles({
     list: {
@@ -25,7 +26,9 @@ const Sidebar = ({open, handleChange}) => {
     const [showForm, setShowForm] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
-    const adminList = [{title: "Driving school", icon: <SchoolRounded/>, path:'drivingSchool'}, {title: "Users", icon: <AccountBoxRounded/>}, {title: "Routes", icon: <DirectionsCarRounded/>}, {title: "Streets", icon: <TrafficRounded/>}]
+    let history = useHistory();
+
+    const adminList = [{title: "Driving school", icon: <SchoolRounded/>, path:'driving-school'}, {title: "Users", icon: <AccountBoxRounded/>}, {title: "Routes", icon: <DirectionsCarRounded/>}, {title: "Streets", icon: <TrafficRounded/>, path:'streets'}]
     const instructorList = [{title: "Calendar", icon: <CalendarTodayRounded/>}, {title: "Classes", icon: <BookRounded/>}, {title: "Candidates", icon: <AccountBoxRounded/>}]
     const candidateList = [{title: "Scheduling", icon: <ScheduleRounded/>}, {title: "Classes", icon: <BookRounded/>}, {title: "Course progress", icon: <AssessmentRounded/>}]
 
@@ -60,11 +63,12 @@ const Sidebar = ({open, handleChange}) => {
         }
       }
 
-      fetch(`${serviceConfig.baseURL}/drivingSchool/exists`, requestOptions)
+      fetch(`${serviceConfig.baseURL}/driving-school/exists`, requestOptions)
         .then(response => {
           if (!response.ok) {
               return Promise.reject(response);
           }
+          setExists(true)
       })
       .catch(response => {
         if(response.status === 400)
@@ -73,8 +77,12 @@ const Sidebar = ({open, handleChange}) => {
     }
 
     const handleClick = (path) => {
-        if(path === 'drivingSchool' && !exists)
+        if(path === 'driving-school' && !exists){
           setShow(true);
+          return;
+        }
+
+        history.push(`/${path}`);
     }
 
     const handleAgree = () => {
@@ -104,7 +112,7 @@ const Sidebar = ({open, handleChange}) => {
             {list(anchor)}
           </Drawer>
           <AlertDialog show={show} handleDisagree={() => setShow(false)} handleAgree={handleAgree}/>
-          <DrivingSchoolForm showDialog={showForm} handleClose={() => setShowForm(false)} showAlert={() => setShowForm(true)}/>
+          <DrivingSchoolForm showDialog={showForm} handleClose={() => setShowForm(false)} showAlert={() => setShowForm(true)} check={checkIfSchoolExists}/>
           <CustomAlert severity={'success'} message={"Successfully added!"} show={showAlert} handleClose={() => setShowAlert(false)}/>
         </div>
     );

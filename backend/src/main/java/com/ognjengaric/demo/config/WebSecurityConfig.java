@@ -56,6 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
+                .csrf().disable()
+
                 .authorizeRequests().antMatchers("/auth/login").permitAll()
 
                 .anyRequest().authenticated().and()
@@ -64,8 +66,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .addFilterBefore(new TokenAuthenticationFilter(tokenUtils, jwtUserDetailsService),
                         BasicAuthenticationFilter.class);
-
-        http.csrf().disable();
     }
 
     @Override
