@@ -24,10 +24,10 @@ public class DrivingClass {
     private Route route;
 
     @Column
-    private LocalDateTime start;
+    private LocalDateTime start_dt;
 
     @Column
-    private LocalDateTime end;
+    private LocalDateTime end_dt;
 
     public DrivingClass() {
     }
@@ -72,19 +72,19 @@ public class DrivingClass {
         this.route = route;
     }
 
-    public LocalDateTime getStart() {
-        return start;
+    public LocalDateTime getStart_dt() {
+        return start_dt;
     }
 
-    public void setStart(LocalDateTime start) {
-        this.start = start;
+    public void setStart_dt(LocalDateTime start_dt) {
+        this.start_dt = start_dt;
     }
 
-    public LocalDateTime getEnd() {
-        return end;
+    public LocalDateTime getEnd_dt() {
+        return end_dt;
     }
 
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
+    public void setEnd_dt(LocalDateTime end_dt) {
+        this.end_dt = end_dt;
     }
 }
