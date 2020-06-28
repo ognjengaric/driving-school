@@ -17,7 +17,7 @@ public class Role implements GrantedAuthority {
     }
 
     public String getName() {
-        return name;
+        return name.split("_")[1].toLowerCase();
     }
 
     public void setName(String name) {
