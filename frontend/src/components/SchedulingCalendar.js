@@ -32,6 +32,7 @@ const SchedulingCalendar = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line
     }, [])
 
     const fetchData = () => {
@@ -63,13 +64,41 @@ const SchedulingCalendar = () => {
         return appointments;
     }
 
+    const commitChanges = ({added}) => {
+
+
+        let {startDate, endDate} = added;
+        
+        let body = {startDate, endDate}
+
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${auth.token}` ,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        }
+
+        fetch(`${serviceConfig.baseURL}/class`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject(response);
+            } 
+            fetchData()
+        })
+    }
+
     return(
         <div>
             <HomePage/>
             <div className={classes.scheduler}>
                 <Scheduler style={{padding:"5%"}} data={data}>
                 <ViewState/>
-                <EditingState/>
+                <EditingState
+                    onCommitChanges={commitChanges}
+                />
                 <DayView
                     startDayHour={8}
                     endDayHour={21}
@@ -91,7 +120,9 @@ const SchedulingCalendar = () => {
                 <AllDayPanel/>       
                 <ConfirmationDialog/>
                 <AppointmentForm 
-                    
+                    textEditorComponent={'x'}
+                    booleanEditorComponent={'x'}
+                    labelComponent={'x'}
                 />
                 </Scheduler>
             </div>
