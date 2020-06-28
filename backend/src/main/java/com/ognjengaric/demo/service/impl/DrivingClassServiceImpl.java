@@ -9,9 +9,10 @@ import com.ognjengaric.demo.repository.DrivingClassRepository;
 import com.ognjengaric.demo.service.DrivingClassService;
 import com.ognjengaric.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,27 @@ public class DrivingClassServiceImpl implements DrivingClassService {
     @Override
     public List<DrivingClass> findByInstructor(Instructor instructor) {
         return drivingClassRepository.findByInstructor(instructor);
+    }
+
+    @Override
+    public Integer save(AppointmentDTO appointmentDTO, String user_id) {
+        User user = userService.findById(user_id);
+        Candidate candidate;
+        Instructor instructor;
+
+        try {
+            candidate = (Candidate) user;
+            instructor = candidate.getInstructor();
+        } catch (ClassCastException e){
+            return null;
+        }
+
+        LocalDateTime start = ZonedDateTime.parse(appointmentDTO.getStartDate()).toLocalDateTime();
+        LocalDateTime end =  ZonedDateTime.parse(appointmentDTO.getEndDate()).toLocalDateTime();
+
+        DrivingClass drivingClass = drivingClassRepository.saveAndFlush(new DrivingClass(candidate, instructor, start, end));
+
+        return drivingClass.getId();
     }
 
     @Override

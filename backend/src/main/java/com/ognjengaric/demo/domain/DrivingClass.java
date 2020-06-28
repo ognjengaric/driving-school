@@ -32,6 +32,14 @@ public class DrivingClass {
     public DrivingClass() {
     }
 
+    public DrivingClass(Candidate candidate, Instructor instructor, LocalDateTime start_dt, LocalDateTime end_dt) {
+        this.classStatusType = ClassStatusType.PENDING;
+        this.candidate = candidate;
+        this.instructor = instructor;
+        this.start_dt = start_dt;
+        this.end_dt = end_dt;
+    }
+
     public Integer getId() {
         return id;
     }
