@@ -9,6 +9,7 @@ import java.util.List;
 public interface DrivingClassService {
     List<DrivingClass> findByInstructor(Instructor instructor);
     Integer save(AppointmentDTO appointmentDTO, String user_id);
+    List<DrivingClass> findAll();
 
     List<AppointmentDTO> getClassesForUserScheduler(String user_id);
 }

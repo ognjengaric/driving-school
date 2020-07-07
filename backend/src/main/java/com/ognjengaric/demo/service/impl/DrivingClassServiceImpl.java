@@ -31,6 +31,11 @@ public class DrivingClassServiceImpl implements DrivingClassService {
     }
 
     @Override
+    public List<DrivingClass> findAll() {
+        return drivingClassRepository.findAll();
+    }
+
+    @Override
     public Integer save(AppointmentDTO appointmentDTO, String user_id) {
         User user = userService.findById(user_id);
         Candidate candidate;
