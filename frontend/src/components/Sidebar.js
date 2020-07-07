@@ -28,7 +28,7 @@ const Sidebar = ({open, handleChange}) => {
 
     let history = useHistory();
 
-    const adminList = [{title: "Driving school", icon: <SchoolRounded/>, path:'driving-school'}, {title: "Users", icon: <AccountBoxRounded/>}, {title: "Routes", icon: <DirectionsCarRounded/>}, {title: "Streets", icon: <TrafficRounded/>, path:'streets'}]
+    const adminList = [{title: "Driving school", icon: <SchoolRounded/>, path:'driving-school'}, {title: "Users", icon: <AccountBoxRounded/>}, {title: "Routes", icon: <DirectionsCarRounded/>, path:'routes'}, {title: "Streets", icon: <TrafficRounded/>, path:'streets'}]
     const instructorList = [{title: "Calendar", icon: <CalendarTodayRounded/>}, {title: "Classes", icon: <BookRounded/>}, {title: "Candidates", icon: <AccountBoxRounded/>}]
     const candidateList = [{title: "Scheduling", icon: <ScheduleRounded/>, path:'schedule'}, {title: "Classes", icon: <BookRounded/>}, {title: "Course progress", icon: <AssessmentRounded/>}]
 
