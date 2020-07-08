@@ -4,6 +4,7 @@ import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 import TrafficRoutes from './components/TrafficRoutes';
 import Streets from './components/Streets'
+import SchedulingCalender from './components/SchedulingCalendar'
 
 
 
@@ -14,6 +15,7 @@ const Routes = () => {
             <Route path="/home" component={HomePage}/>
             <Route path="/routes" component={TrafficRoutes}/>
             <Route path="/streets" component={Streets}/>
+            <Route path="/schedule" component={SchedulingCalender}/>
         </Switch>
     );
 }

@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "usr")
+@Inheritance
+@DiscriminatorValue(value = "A")
 public class User implements UserDetails {
 
     @Id

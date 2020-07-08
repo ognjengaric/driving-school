@@ -10,16 +10,28 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
+
 @Service
 public class StreetServiceImpl implements StreetService {
 
     @Autowired
     StreetRepository streetRepository;
 
+    private static String DEFAULT_SORT_COLUMN = "name";
+
     @Override
     public Page<Street> findPageable(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(DEFAULT_SORT_COLUMN));
         return streetRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Street> findAll() {
+        List<Street> streets = streetRepository.findAll();
+        streets.sort(Comparator.comparing(Street::getName));
+        return streets;
     }
 
     @Override

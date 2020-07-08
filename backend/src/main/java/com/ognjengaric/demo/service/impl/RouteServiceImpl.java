@@ -7,6 +7,8 @@ import com.ognjengaric.demo.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RouteServiceImpl implements RouteService {
 
@@ -17,6 +19,11 @@ public class RouteServiceImpl implements RouteService {
     public Integer save(NewRouteDTO newRouteDTO) {
        Route route = routeRepository.saveAndFlush(new Route(newRouteDTO));
        return route.getId();
+    }
+
+    @Override
+    public List<Route> findAll() {
+        return routeRepository.findAll();
     }
 
     @Override
