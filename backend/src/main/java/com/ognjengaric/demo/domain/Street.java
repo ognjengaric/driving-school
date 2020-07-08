@@ -2,15 +2,21 @@ package com.ognjengaric.demo.domain;
 
 import com.ognjengaric.demo.enums.RoadType;
 import com.ognjengaric.demo.enums.TrafficIntensityType;
+import org.hibernate.annotations.NaturalId;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Street {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @NaturalId
     private String name;
 
     @Column
@@ -19,6 +25,9 @@ public class Street {
     @Column
     private RoadType roadType;
 
+    @ManyToMany(mappedBy = "streets")
+    private Set<Route> routes = new HashSet<>();
+
     public Street() {
     }
 
@@ -26,6 +35,14 @@ public class Street {
         this.name = name;
         this.intensity = TrafficIntensityType.UNDEFINED;
         this.roadType = RoadType.UNDEFINED;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -50,5 +67,26 @@ public class Street {
 
     public void setRoadType(RoadType roadType) {
         this.roadType = roadType;
+    }
+
+    public Set<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(Set<Route> routes) {
+        this.routes = routes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Street street = (Street) o;
+        return Objects.equals(name, street.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

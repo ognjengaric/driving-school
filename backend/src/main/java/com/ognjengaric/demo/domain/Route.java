@@ -6,7 +6,9 @@ import com.ognjengaric.demo.enums.CategoryType;
 import javax.persistence.*;
 import java.util.ArrayList;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -22,8 +24,15 @@ public class Route {
     @ElementCollection
     private List<Point> routePath = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Street> streets = new ArrayList<>();
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "route_streets",
+            joinColumns = @JoinColumn(name = "route_id"),
+            inverseJoinColumns = @JoinColumn(name = "street_name")
+    )
+    private Set<Street> streets = new HashSet<>();
 
     @Column
     private int time;
@@ -39,7 +48,7 @@ public class Route {
         this.time = newRouteDTO.getTime();
         this.distance = newRouteDTO.getDistance();
         this.routePath = newRouteDTO.getRoutePath();
-        this.streets = newRouteDTO.getStreets().stream().map(Street::new).collect(Collectors.toList());
+        this.streets = newRouteDTO.getStreets().stream().map(Street::new).collect(Collectors.toSet());
     }
 
     public Integer getId() {
@@ -66,11 +75,11 @@ public class Route {
         this.routePath = routePath;
     }
 
-    public List<Street> getStreets() {
+    public Set<Street> getStreets() {
         return streets;
     }
 
-    public void setStreets(List<Street> streets) {
+    public void setStreets(Set<Street> streets) {
         this.streets = streets;
     }
 
