@@ -14,7 +14,7 @@ public class NewRouteDTO {
     private int time;
     private int distance;
     private Set<String> streets = new HashSet<>();
-    private List<Point> routePath = new ArrayList<>();
+    private List<Point> points = new ArrayList<>();
 
     public NewRouteDTO() {
     }
@@ -51,11 +51,11 @@ public class NewRouteDTO {
         this.streets = streets;
     }
 
-    public List<Point> getRoutePath() {
-        return routePath;
+    public List<Point> getPoints() {
+        return points;
     }
 
-    public void setRoutePath(List<Point> routePath) {
-        this.routePath = routePath;
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
 }

@@ -22,12 +22,9 @@ public class Route {
     private CategoryType categoryType;
 
     @ElementCollection
-    private List<Point> routePath = new ArrayList<>();
+    private List<Point> points = new ArrayList<>();
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+    @ManyToMany
     @JoinTable(name = "route_streets",
             joinColumns = @JoinColumn(name = "route_id"),
             inverseJoinColumns = @JoinColumn(name = "street_name")
@@ -47,8 +44,7 @@ public class Route {
         this.categoryType = newRouteDTO.getCategory();
         this.time = newRouteDTO.getTime();
         this.distance = newRouteDTO.getDistance();
-        this.routePath = newRouteDTO.getRoutePath();
-        this.streets = newRouteDTO.getStreets().stream().map(Street::new).collect(Collectors.toSet());
+        this.points = newRouteDTO.getPoints();
     }
 
     public Integer getId() {
@@ -67,12 +63,12 @@ public class Route {
         this.categoryType = categoryType;
     }
 
-    public List<Point> getRoutePath() {
-        return routePath;
+    public List<Point> getPoints() {
+        return points;
     }
 
-    public void setRoutePath(List<Point> routePath) {
-        this.routePath = routePath;
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
 
     public Set<Street> getStreets() {

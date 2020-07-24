@@ -31,10 +31,11 @@ public class Street {
     public Street() {
     }
 
-    public Street(String name) {
+    public Street(String name, Route route) {
         this.name = name;
         this.intensity = TrafficIntensityType.UNDEFINED;
         this.roadType = RoadType.UNDEFINED;
+        this.addRoute(route);
     }
 
     public Integer getId() {
@@ -76,6 +77,8 @@ public class Street {
     public void setRoutes(Set<Route> routes) {
         this.routes = routes;
     }
+
+    public void addRoute(Route route){this.routes.add(route);};
 
     @Override
     public boolean equals(Object o) {
