@@ -6,7 +6,9 @@ import com.ognjengaric.demo.enums.CategoryType;
 import javax.persistence.*;
 import java.util.ArrayList;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -20,10 +22,14 @@ public class Route {
     private CategoryType categoryType;
 
     @ElementCollection
-    private List<Point> routePath = new ArrayList<>();
+    private List<Point> points = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Street> streets = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "route_streets",
+            joinColumns = @JoinColumn(name = "route_id"),
+            inverseJoinColumns = @JoinColumn(name = "street_name")
+    )
+    private Set<Street> streets = new HashSet<>();
 
     @Column
     private int time;
@@ -38,8 +44,7 @@ public class Route {
         this.categoryType = newRouteDTO.getCategory();
         this.time = newRouteDTO.getTime();
         this.distance = newRouteDTO.getDistance();
-        this.routePath = newRouteDTO.getRoutePath();
-        this.streets = newRouteDTO.getStreets().stream().map(Street::new).collect(Collectors.toList());
+        this.points = newRouteDTO.getPoints();
     }
 
     public Integer getId() {
@@ -58,19 +63,19 @@ public class Route {
         this.categoryType = categoryType;
     }
 
-    public List<Point> getRoutePath() {
-        return routePath;
+    public List<Point> getPoints() {
+        return points;
     }
 
-    public void setRoutePath(List<Point> routePath) {
-        this.routePath = routePath;
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
 
-    public List<Street> getStreets() {
+    public Set<Street> getStreets() {
         return streets;
     }
 
-    public void setStreets(List<Street> streets) {
+    public void setStreets(Set<Street> streets) {
         this.streets = streets;
     }
 

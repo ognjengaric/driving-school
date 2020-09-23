@@ -4,15 +4,17 @@ import com.ognjengaric.demo.domain.Point;
 import com.ognjengaric.demo.enums.CategoryType;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class NewRouteDTO {
 
     private CategoryType category;
     private int time;
     private int distance;
-    private List<String> streets = new ArrayList<>();
-    private List<Point> routePath = new ArrayList<>();
+    private Set<String> streets = new HashSet<>();
+    private List<Point> points = new ArrayList<>();
 
     public NewRouteDTO() {
     }
@@ -41,19 +43,19 @@ public class NewRouteDTO {
         this.distance = distance;
     }
 
-    public List<String> getStreets() {
+    public Set<String> getStreets() {
         return streets;
     }
 
-    public void setStreets(List<String> streets) {
+    public void setStreets(Set<String> streets) {
         this.streets = streets;
     }
 
-    public List<Point> getRoutePath() {
-        return routePath;
+    public List<Point> getPoints() {
+        return points;
     }
 
-    public void setRoutePath(List<Point> routePath) {
-        this.routePath = routePath;
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
 }

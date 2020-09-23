@@ -8,11 +8,10 @@ import com.ognjengaric.demo.dto.AppointmentDTO;
 import com.ognjengaric.demo.repository.DrivingClassRepository;
 import com.ognjengaric.demo.service.DrivingClassService;
 import com.ognjengaric.demo.service.UserService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +47,8 @@ public class DrivingClassServiceImpl implements DrivingClassService {
             return null;
         }
 
-        LocalDateTime start = ZonedDateTime.parse(appointmentDTO.getStartDate()).toLocalDateTime();
-        LocalDateTime end =  ZonedDateTime.parse(appointmentDTO.getEndDate()).toLocalDateTime();
+        DateTime start = DateTime.parse(appointmentDTO.getStartDate());
+        DateTime end =  DateTime.parse(appointmentDTO.getEndDate());
 
         DrivingClass drivingClass = drivingClassRepository.saveAndFlush(new DrivingClass(candidate, instructor, start, end));
 

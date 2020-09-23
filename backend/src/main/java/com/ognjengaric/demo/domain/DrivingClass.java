@@ -1,9 +1,9 @@
 package com.ognjengaric.demo.domain;
 
 import com.ognjengaric.demo.enums.ClassStatusType;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class DrivingClass {
@@ -24,15 +24,15 @@ public class DrivingClass {
     private Route route;
 
     @Column
-    private LocalDateTime start_dt;
+    private DateTime start_dt;
 
     @Column
-    private LocalDateTime end_dt;
+    private DateTime end_dt;
 
     public DrivingClass() {
     }
 
-    public DrivingClass(Candidate candidate, Instructor instructor, LocalDateTime start_dt, LocalDateTime end_dt) {
+    public DrivingClass(Candidate candidate, Instructor instructor, DateTime start_dt, DateTime end_dt) {
         this.classStatusType = ClassStatusType.PENDING;
         this.candidate = candidate;
         this.instructor = instructor;
@@ -80,19 +80,19 @@ public class DrivingClass {
         this.route = route;
     }
 
-    public LocalDateTime getStart_dt() {
+    public DateTime getStart_dt() {
         return start_dt;
     }
 
-    public void setStart_dt(LocalDateTime start_dt) {
+    public void setStart_dt(DateTime start_dt) {
         this.start_dt = start_dt;
     }
 
-    public LocalDateTime getEnd_dt() {
+    public DateTime getEnd_dt() {
         return end_dt;
     }
 
-    public void setEnd_dt(LocalDateTime end_dt) {
+    public void setEnd_dt(DateTime end_dt) {
         this.end_dt = end_dt;
     }
 }

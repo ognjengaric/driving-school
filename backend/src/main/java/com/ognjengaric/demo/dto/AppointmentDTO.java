@@ -3,8 +3,6 @@ package com.ognjengaric.demo.dto;
 import com.ognjengaric.demo.domain.DrivingClass;
 import com.ognjengaric.demo.enums.ClassStatusType;
 
-import java.time.LocalDateTime;
-
 public class AppointmentDTO {
     private String title;
     private String startDate;
