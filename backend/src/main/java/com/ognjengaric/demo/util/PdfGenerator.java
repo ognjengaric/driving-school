@@ -24,7 +24,7 @@ public class PdfGenerator {
             List<String> headers = Arrays.asList("Name", "Surname", "Role", "Current Licence");
             PdfPTable table = initTable(headers);
 
-            users.forEach(user -> {;
+            users.forEach(user -> {
 
                 String name = user.getName();
                 String surname = user.getSurname();
@@ -127,7 +127,7 @@ public class PdfGenerator {
             routes.forEach(route -> {
                 String id = route.getId().toString();
                 String category = route.getCategoryType().toString();
-                String time = Integer.toString(route.getTime()/60) + "min";
+                String time =   Integer.toString(route.getTime()/60) + "min";
                 String distance = Integer.toString(route.getDistance());
 
                 List<String> values = Arrays.asList(id, category, time, distance);

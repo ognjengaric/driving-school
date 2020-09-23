@@ -1,5 +1,6 @@
 package com.ognjengaric.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ognjengaric.demo.enums.RoadType;
 import com.ognjengaric.demo.enums.TrafficIntensityType;
 import org.hibernate.annotations.NaturalId;
@@ -25,6 +26,7 @@ public class Street {
     @Column
     private RoadType roadType;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "streets")
     private Set<Route> routes = new HashSet<>();
 
