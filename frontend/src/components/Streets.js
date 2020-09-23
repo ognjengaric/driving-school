@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HomePage from './HomePage';
 import { Grid, Chip, makeStyles, TablePagination, IconButton, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, List} from '@material-ui/core';
-import { LocationCity, DirectionsCar, Edit } from '@material-ui/icons';
+import { LocationCity, DirectionsCar, Edit, House, Help } from '@material-ui/icons';
 import {serviceConfig} from '../appSettings.js'
 import StreetForm from './StreetForm';
 
@@ -77,12 +77,12 @@ const Streets = () => {
                 <ListItemText primary={s.name}/>
                 <ListItemSecondaryAction>
                     <Chip
-                        icon={<LocationCity />}
+                        icon={s.roadType === 'URBAN' ? <LocationCity/> : s.roadType === 'RURAL' ? <House/> : <Help/>}
                         label={s.roadType.toLowerCase()}                                
                         className={s.roadType === 'UNDEFINED' ? classes.chip_u : classes.chip}
                     />
                     <Chip
-                        icon={<DirectionsCar />}
+                        icon={s.intensity === 'UNDEFINED' ? <Help/> : <DirectionsCar/>}
                         label={s.intensity.toLowerCase()}
                         className={s.intensity === 'UNDEFINED' ? classes.chip_u : classes.chip}
                     />
