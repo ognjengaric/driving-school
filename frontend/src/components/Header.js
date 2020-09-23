@@ -5,6 +5,7 @@ import {makeStyles} from '@material-ui/styles';
 import {DescriptionOutlined as PdfIcon} from '@material-ui/icons'
 import Reports from './Reports';
 import {useHistory} from "react-router";
+import {serviceConfig} from '../appSettings.js'
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -34,7 +35,27 @@ const Header = ({handleChange}) => {
     
       const handleClose = () => {
         setAnchorEl(null);
-      };
+    };
+
+    const logout = (event) => {
+        const auth = JSON.parse(localStorage.getItem('auth'));
+
+        const requestOptions = {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${auth.token}` ,
+            }
+        }
+
+        fetch(`${serviceConfig.baseURL}/auth/logout`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject(response);
+            } 
+            localStorage.removeItem('auth');
+            history.push("");
+        })
+    }
 
     return(
         <AppBar>
@@ -50,7 +71,7 @@ const Header = ({handleChange}) => {
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="Log out">
-                    <IconButton aria-label="log-out" className={classes.btn}>       
+                    <IconButton aria-label="log-out" onClick={logout} className={classes.btn}>       
                         <ExitToAppOutlined className={classes.icon}/>
                     </IconButton>
                 </Tooltip>

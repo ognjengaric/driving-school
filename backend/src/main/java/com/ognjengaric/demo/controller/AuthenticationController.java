@@ -13,10 +13,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/auth")
@@ -49,5 +50,22 @@ public class AuthenticationController {
         String role = ((Role)user.getAuthorities().toArray()[0]).getAuthority();
 
         return ResponseEntity.ok(new TokenRoleDTO(jwt, role));
+    }
+
+    @PatchMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request){
+        try {
+            HttpSession session = request.getSession(false);
+
+            if(session != null)
+                session.invalidate();
+
+            SecurityContextHolder.clearContext();
+
+            return ResponseEntity.ok().build();
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
