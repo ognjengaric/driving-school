@@ -19,6 +19,9 @@ public class Candidate extends User{
     @ElementCollection
     private List<CategoryType> ownedLicences = new ArrayList<>();
 
+    @OneToMany
+    private List<DrivingClass> classes = new ArrayList<>();
+
     public Candidate() {
     }
 
@@ -44,6 +47,24 @@ public class Candidate extends User{
 
     public void setOwnedLicences(List<CategoryType> ownedLicences) {
         this.ownedLicences = ownedLicences;
+    }
+
+    public List<DrivingClass> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<DrivingClass> classes) {
+        this.classes = classes;
+    }
+
+    public void addDrivingClass(DrivingClass drivingClass){
+        this.classes.add(drivingClass);
+        drivingClass.setCandidate(this);
+    }
+
+    public void removeDrivingClass(DrivingClass drivingClass){
+        this.classes.remove(drivingClass);
+        drivingClass.setCandidate(null);
     }
 
     @Override
