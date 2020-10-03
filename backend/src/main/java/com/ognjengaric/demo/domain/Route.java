@@ -31,7 +31,7 @@ public class Route {
     private Set<Street> streets = new HashSet<>();
 
     @Column
-    private int time;
+    private int duration;
 
     @Column
     private  float distance;
@@ -41,7 +41,7 @@ public class Route {
 
     public Route(NewRouteDTO newRouteDTO){
         this.categoryType = newRouteDTO.getCategory();
-        this.time = newRouteDTO.getTime();
+        this.duration = newRouteDTO.getTime();
         this.distance = newRouteDTO.getDistance();
         this.points = newRouteDTO.getPoints();
     }
@@ -78,12 +78,12 @@ public class Route {
         this.streets = streets;
     }
 
-    public int getTime() {
-        return time;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public float getDistance() {
