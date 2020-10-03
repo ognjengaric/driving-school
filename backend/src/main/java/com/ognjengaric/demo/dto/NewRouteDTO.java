@@ -12,7 +12,7 @@ public class NewRouteDTO {
 
     private CategoryType category;
     private int time;
-    private int distance;
+    private float distance;
     private Set<String> streets = new HashSet<>();
     private List<Point> points = new ArrayList<>();
 
@@ -35,11 +35,11 @@ public class NewRouteDTO {
         this.time = time;
     }
 
-    public int getDistance() {
+    public float getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
     }
 

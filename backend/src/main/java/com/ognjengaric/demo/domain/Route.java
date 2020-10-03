@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 public class Route {
@@ -35,7 +34,7 @@ public class Route {
     private int time;
 
     @Column
-    private  int distance;
+    private  float distance;
 
     public Route() {
     }
@@ -87,11 +86,11 @@ public class Route {
         this.time = time;
     }
 
-    public int getDistance() {
+    public float getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
     }
 }
