@@ -10,6 +10,10 @@ import java.util.List;
 @DiscriminatorValue(value = "C")
 public class Candidate extends User{
 
+
+    @Column(unique = true)
+    private String candidateId;
+
     @Column
     private CategoryType currentLicence;
 
@@ -23,6 +27,14 @@ public class Candidate extends User{
     private List<DrivingClass> classes = new ArrayList<>();
 
     public Candidate() {
+    }
+
+    public String getCandidateId() {
+        return candidateId;
+    }
+
+    public void setCandidateId(String candidateId) {
+        this.candidateId = candidateId;
     }
 
     public CategoryType getCurrentLicence() {
