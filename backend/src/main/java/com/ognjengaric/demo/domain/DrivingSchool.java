@@ -20,11 +20,18 @@ public class DrivingSchool {
     private String shortName;
 
     @ElementCollection
-    private List<CategoryType> availableCategories;
+    private List<CategoryType> availableCategories = new ArrayList<>();
 
-    public DrivingSchool() {
-        this.availableCategories = new ArrayList<>();
-    }
+    @OneToMany
+    private List<Candidate> candidates = new ArrayList<>();
+
+    @OneToMany
+    private List<Instructor> instructors = new ArrayList<>();
+
+    @OneToMany
+    private List<DrivingClass> classes = new ArrayList<>();
+
+    public DrivingSchool() {}
 
     public String getId() {
         return id;
@@ -56,5 +63,29 @@ public class DrivingSchool {
 
     public void setAvailableCategories(List<CategoryType> availableCategories) {
         this.availableCategories = availableCategories;
+    }
+
+    public List<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates = candidates;
+    }
+
+    public List<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(List<Instructor> instructors) {
+        this.instructors = instructors;
+    }
+
+    public List<DrivingClass> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<DrivingClass> classes) {
+        this.classes = classes;
     }
 }
