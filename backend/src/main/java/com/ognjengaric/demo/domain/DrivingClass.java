@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class DrivingClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @ManyToOne
     private Candidate candidate;
@@ -18,33 +18,46 @@ public class DrivingClass {
     private Instructor instructor;
 
     @Column
-    private ClassStatusType classStatusType;
+    private ClassStatusType status;
 
     @ManyToOne
     private Route route;
 
     @Column
-    private DateTime start_dt;
+    private DateTime startDt;
 
     @Column
-    private DateTime end_dt;
+    private DateTime endDt;
+
+    @Column
+    private DateTime actualStartDt;
+
+    @Column
+    private DateTime actualEndDt;
+
+    @Column
+    private Boolean isOnDrivingRange;
+
+    @Column
+    private Boolean isWithLoad;
 
     public DrivingClass() {
+        this.status = ClassStatusType.PENDING;
     }
 
-    public DrivingClass(Candidate candidate, Instructor instructor, DateTime start_dt, DateTime end_dt) {
-        this.classStatusType = ClassStatusType.PENDING;
+    public DrivingClass(Candidate candidate, Instructor instructor, DateTime startDt, DateTime endDt) {
+        this.status = ClassStatusType.PENDING;
         this.candidate = candidate;
         this.instructor = instructor;
-        this.start_dt = start_dt;
-        this.end_dt = end_dt;
+        this.startDt = startDt;
+        this.endDt = endDt;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -64,12 +77,12 @@ public class DrivingClass {
         this.instructor = instructor;
     }
 
-    public ClassStatusType getClassStatusType() {
-        return classStatusType;
+    public ClassStatusType getStatus() {
+        return status;
     }
 
-    public void setClassStatusType(ClassStatusType classStatusType) {
-        this.classStatusType = classStatusType;
+    public void setStatus(ClassStatusType status) {
+        this.status = status;
     }
 
     public Route getRoute() {
@@ -80,19 +93,51 @@ public class DrivingClass {
         this.route = route;
     }
 
-    public DateTime getStart_dt() {
-        return start_dt;
+    public DateTime getStartDt() {
+        return startDt;
     }
 
-    public void setStart_dt(DateTime start_dt) {
-        this.start_dt = start_dt;
+    public void setStartDt(DateTime startDt) {
+        this.startDt = startDt;
     }
 
-    public DateTime getEnd_dt() {
-        return end_dt;
+    public DateTime getEndDt() {
+        return endDt;
     }
 
-    public void setEnd_dt(DateTime end_dt) {
-        this.end_dt = end_dt;
+    public void setEndDt(DateTime endDt) {
+        this.endDt = endDt;
+    }
+
+    public DateTime getActualStartDt() {
+        return actualStartDt;
+    }
+
+    public void setActualStartDt(DateTime actualStartDt) {
+        this.actualStartDt = actualStartDt;
+    }
+
+    public DateTime getActualEndDt() {
+        return actualEndDt;
+    }
+
+    public void setActualEndDt(DateTime actualEndDt) {
+        this.actualEndDt = actualEndDt;
+    }
+
+    public Boolean getOnDrivingRange() {
+        return isOnDrivingRange;
+    }
+
+    public void setOnDrivingRange(Boolean onDrivingRange) {
+        isOnDrivingRange = onDrivingRange;
+    }
+
+    public Boolean getWithLoad() {
+        return isWithLoad;
+    }
+
+    public void setWithLoad(Boolean withLoad) {
+        isWithLoad = withLoad;
     }
 }

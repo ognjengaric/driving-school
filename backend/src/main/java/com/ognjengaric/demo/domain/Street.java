@@ -6,9 +6,7 @@ import com.ognjengaric.demo.enums.TrafficIntensityType;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Street {
@@ -28,7 +26,7 @@ public class Street {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "streets")
-    private Set<Route> routes = new HashSet<>();
+    private List<Route> routes = new ArrayList<>();
 
     public Street() {
     }
@@ -72,11 +70,11 @@ public class Street {
         this.roadType = roadType;
     }
 
-    public Set<Route> getRoutes() {
+    public List<Route> getRoutes() {
         return routes;
     }
 
-    public void setRoutes(Set<Route> routes) {
+    public void setRoutes(List<Route> routes) {
         this.routes = routes;
     }
 
