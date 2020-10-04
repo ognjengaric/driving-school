@@ -16,7 +16,7 @@ public class AppointmentDTO {
         this.title = drivingClass.getCandidate().getName() + " " + drivingClass.getCandidate().getSurname();
         this.startDate = drivingClass.getStartDt().toString();
         this.endDate = drivingClass.getEndDt().toString();
-        this.id = drivingClass.getId();
+        this.id = drivingClass.getId().toString();
         this.status = drivingClass.getStatus();
     }
 
