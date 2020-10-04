@@ -17,7 +17,7 @@ public class StreetController {
 
     @GetMapping(params = { "page", "size" })
     public Page<Street> getPageable(@RequestParam("page") int page, @RequestParam("size") int size){
-        return streetService.findPageable(page, size);
+        return streetService.getPageable(page, size);
     }
 
     @PutMapping
