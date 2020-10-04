@@ -22,7 +22,7 @@ public class StreetServiceImpl implements StreetService {
     private static String DEFAULT_SORT_COLUMN = "name";
 
     @Override
-    public Page<Street> findPageable(int page, int size) {
+    public Page<Street> getPageable(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(DEFAULT_SORT_COLUMN));
         return streetRepository.findAll(pageable);
     }
