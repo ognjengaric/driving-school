@@ -7,17 +7,17 @@ public class AppointmentDTO {
     private String title;
     private String startDate;
     private String endDate;
-    private int id;
+    private String id;
     private ClassStatusType status;
 
     public AppointmentDTO(){}
 
     public AppointmentDTO(DrivingClass drivingClass) {
         this.title = drivingClass.getCandidate().getName() + " " + drivingClass.getCandidate().getSurname();
-        this.startDate = drivingClass.getStart_dt().toString();
-        this.endDate = drivingClass.getEnd_dt().toString();
-        this.id = drivingClass.getId();
-        this.status = drivingClass.getClassStatusType();
+        this.startDate = drivingClass.getStartDt().toString();
+        this.endDate = drivingClass.getEndDt().toString();
+        this.id = drivingClass.getId().toString();
+        this.status = drivingClass.getStatus();
     }
 
     public String getTitle() {
@@ -44,11 +44,11 @@ public class AppointmentDTO {
         this.endDate = endDate;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

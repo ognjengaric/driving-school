@@ -24,7 +24,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog({showDialog, handleClose, showAlert, check}) {
+export default function FullScreenDialog({showDialog, handleClose, showAlert}) {
   const categories = ['AM', 'A1', 'A2', 'A', 'B1', 'B', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'F', 'M'];
   const classes = useStyles();
   const [state, setState] = useState({
@@ -76,7 +76,6 @@ export default function FullScreenDialog({showDialog, handleClose, showAlert, ch
         if (!response.ok) {
             return Promise.reject(response);
         } 
-        check();
         showAlert();
         handleClose();
     })

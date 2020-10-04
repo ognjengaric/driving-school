@@ -20,18 +20,8 @@ public class DrivingSchoolServiceImpl implements DrivingSchoolService {
     }
 
     @Override
-    public long count() {
-        return drivingSchoolRepository.count();
-    }
-
-    @Override
     public void save(DrivingSchool drivingSchool){
         Collections.sort(drivingSchool.getAvailableCategories());
         drivingSchoolRepository.save(drivingSchool);
-    }
-
-    @Override
-    public DrivingSchool getSchool() {
-        return drivingSchoolRepository.findFirstByOrderById().orElse(null);
     }
 }

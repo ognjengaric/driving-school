@@ -4,6 +4,7 @@ import com.ognjengaric.demo.domain.DrivingSchool;
 import com.ognjengaric.demo.service.DrivingSchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,11 @@ public class DrivingSchoolController {
     @Autowired
     DrivingSchoolService drivingSchoolService;
 
+    @GetMapping(params = { "page", "size" })
+    public Page<DrivingSchool> getPageable(@RequestParam("page") int page, @RequestParam("size") int size){
+        return null;
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getDrivingSchool(@PathVariable String id){
         DrivingSchool drivingSchool = drivingSchoolService.findById(id);
@@ -34,33 +40,11 @@ public class DrivingSchoolController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> postDrivingSchool(@RequestBody DrivingSchool drivingSchool){
-
-        if(drivingSchoolService.count() != 0)
-            return ResponseEntity.badRequest().build();
-
         drivingSchoolService.save(drivingSchool);
 
         URI uri = URI.create(backendUri + "/drivingSchool/" + drivingSchool.getId());
 
         return ResponseEntity.created(uri).build();
-    }
-
-    @GetMapping("/exists")
-    public ResponseEntity<?> existsDrivingSchool(){
-        if(drivingSchoolService.count() == 1)
-            return ResponseEntity.ok().build();
-        else
-            return ResponseEntity.badRequest().build();
-    }
-
-    @GetMapping("/categories")
-    public ResponseEntity<?> getSchoolCategories(){
-        DrivingSchool drivingSchool = drivingSchoolService.getSchool();
-
-        if(drivingSchool != null)
-            return ResponseEntity.ok(drivingSchool.getAvailableCategories());
-        else
-            return ResponseEntity.badRequest().build();
     }
 
 }

@@ -64,8 +64,8 @@ public class PdfGenerator {
             drivingClasses.forEach(drivingClass -> {
                 String instructor = drivingClass.getInstructor().getName()+ " " + drivingClass.getInstructor().getSurname();
                 String candidate = drivingClass.getCandidate().getName() + " " + drivingClass.getCandidate().getSurname();
-                String start_time = drivingClass.getStart_dt().toString();
-                String end_time = drivingClass.getEnd_dt().toString();
+                String start_time = drivingClass.getStartDt().toString();
+                String end_time = drivingClass.getEndDt().toString();
 
                 List<String> values = Arrays.asList(instructor, candidate, start_time, end_time);
 
@@ -127,8 +127,8 @@ public class PdfGenerator {
             routes.forEach(route -> {
                 String id = route.getId().toString();
                 String category = route.getCategoryType().toString();
-                String time =   Integer.toString(route.getTime()/60) + "min";
-                String distance = Integer.toString(route.getDistance());
+                String time =   route.getDuration()/60 + "min";
+                String distance = Float.toString(route.getDistance());
 
                 List<String> values = Arrays.asList(id, category, time, distance);
 

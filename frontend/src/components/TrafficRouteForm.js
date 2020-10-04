@@ -33,7 +33,7 @@ const TrafficRouteForm = ({routeInfo}) => {
             }
         }
 
-        fetch(`${serviceConfig.baseURL}/driving-school/categories`, requestOptions)
+        fetch(`${serviceConfig.baseURL}/licence`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 return Promise.reject(response);

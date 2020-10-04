@@ -1,6 +1,6 @@
 package com.ognjengaric.demo.domain;
 
-import com.ognjengaric.demo.enums.CategoryType;
+import com.ognjengaric.demo.enums.LicenceCategory;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,23 +10,38 @@ import java.util.List;
 @DiscriminatorValue(value = "C")
 public class Candidate extends User{
 
+
+    @Column(unique = true)
+    private String candidateId;
+
     @Column
-    private CategoryType currentLicence;
+    private LicenceCategory currentLicence;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Instructor instructor;
 
     @ElementCollection
-    private List<CategoryType> ownedLicences = new ArrayList<>();
+    private List<LicenceCategory> ownedLicences = new ArrayList<>();
+
+    @OneToMany
+    private List<DrivingClass> classes = new ArrayList<>();
 
     public Candidate() {
     }
 
-    public CategoryType getCurrentLicence() {
+    public String getCandidateId() {
+        return candidateId;
+    }
+
+    public void setCandidateId(String candidateId) {
+        this.candidateId = candidateId;
+    }
+
+    public LicenceCategory getCurrentLicence() {
         return currentLicence;
     }
 
-    public void setCurrentLicence(CategoryType currentLicence) {
+    public void setCurrentLicence(LicenceCategory currentLicence) {
         this.currentLicence = currentLicence;
     }
 
@@ -38,12 +53,30 @@ public class Candidate extends User{
         this.instructor = instructor;
     }
 
-    public List<CategoryType> getOwnedLicences() {
+    public List<LicenceCategory> getOwnedLicences() {
         return ownedLicences;
     }
 
-    public void setOwnedLicences(List<CategoryType> ownedLicences) {
+    public void setOwnedLicences(List<LicenceCategory> ownedLicences) {
         this.ownedLicences = ownedLicences;
+    }
+
+    public List<DrivingClass> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<DrivingClass> classes) {
+        this.classes = classes;
+    }
+
+    public void addDrivingClass(DrivingClass drivingClass){
+        this.classes.add(drivingClass);
+        drivingClass.setCandidate(this);
+    }
+
+    public void removeDrivingClass(DrivingClass drivingClass){
+        this.classes.remove(drivingClass);
+        drivingClass.setCandidate(null);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.ognjengaric.demo.dto;
 
-import com.ognjengaric.demo.domain.Point;
-import com.ognjengaric.demo.enums.CategoryType;
+import com.ognjengaric.demo.domain.Coordinate;
+import com.ognjengaric.demo.enums.LicenceCategory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,36 +10,36 @@ import java.util.Set;
 
 public class NewRouteDTO {
 
-    private CategoryType category;
-    private int time;
-    private int distance;
+    private LicenceCategory category;
+    private int duration;
+    private float distance;
     private Set<String> streets = new HashSet<>();
-    private List<Point> points = new ArrayList<>();
+    private List<Coordinate> coordinates = new ArrayList<>();
 
     public NewRouteDTO() {
     }
 
-    public CategoryType getCategory() {
+    public LicenceCategory getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryType category) {
+    public void setCategory(LicenceCategory category) {
         this.category = category;
     }
 
-    public int getTime() {
-        return time;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public int getDistance() {
+    public float getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
     }
 
@@ -51,11 +51,11 @@ public class NewRouteDTO {
         this.streets = streets;
     }
 
-    public List<Point> getPoints() {
-        return points;
+    public List<Coordinate> getCoordinates() {
+        return coordinates;
     }
 
-    public void setPoints(List<Point> points) {
-        this.points = points;
+    public void setCoordinates(List<Coordinate> coordinates) {
+        this.coordinates = coordinates;
     }
 }

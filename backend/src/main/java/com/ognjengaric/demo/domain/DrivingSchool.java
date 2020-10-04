@@ -2,7 +2,7 @@ package com.ognjengaric.demo.domain;
 
 import javax.persistence.*;
 
-import com.ognjengaric.demo.enums.CategoryType;
+import com.ognjengaric.demo.enums.LicenceCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +20,18 @@ public class DrivingSchool {
     private String shortName;
 
     @ElementCollection
-    private List<CategoryType> availableCategories;
+    private List<LicenceCategory> availableCategories = new ArrayList<>();
 
-    public DrivingSchool() {
-        this.availableCategories = new ArrayList<>();
-    }
+    @OneToMany
+    private List<Candidate> candidates = new ArrayList<>();
+
+    @OneToMany
+    private List<Instructor> instructors = new ArrayList<>();
+
+    @OneToMany
+    private List<DrivingClass> classes = new ArrayList<>();
+
+    public DrivingSchool() {}
 
     public String getId() {
         return id;
@@ -50,11 +57,35 @@ public class DrivingSchool {
         this.shortName = shortName;
     }
 
-    public List<CategoryType> getAvailableCategories() {
+    public List<LicenceCategory> getAvailableCategories() {
         return availableCategories;
     }
 
-    public void setAvailableCategories(List<CategoryType> availableCategories) {
+    public void setAvailableCategories(List<LicenceCategory> availableCategories) {
         this.availableCategories = availableCategories;
+    }
+
+    public List<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates = candidates;
+    }
+
+    public List<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(List<Instructor> instructors) {
+        this.instructors = instructors;
+    }
+
+    public List<DrivingClass> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<DrivingClass> classes) {
+        this.classes = classes;
     }
 }
