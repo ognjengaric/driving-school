@@ -1,6 +1,6 @@
 package com.ognjengaric.demo.domain;
 
-import com.ognjengaric.demo.enums.CategoryType;
+import com.ognjengaric.demo.enums.LicenceCategory;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,13 +15,13 @@ public class Candidate extends User{
     private String candidateId;
 
     @Column
-    private CategoryType currentLicence;
+    private LicenceCategory currentLicence;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Instructor instructor;
 
     @ElementCollection
-    private List<CategoryType> ownedLicences = new ArrayList<>();
+    private List<LicenceCategory> ownedLicences = new ArrayList<>();
 
     @OneToMany
     private List<DrivingClass> classes = new ArrayList<>();
@@ -37,11 +37,11 @@ public class Candidate extends User{
         this.candidateId = candidateId;
     }
 
-    public CategoryType getCurrentLicence() {
+    public LicenceCategory getCurrentLicence() {
         return currentLicence;
     }
 
-    public void setCurrentLicence(CategoryType currentLicence) {
+    public void setCurrentLicence(LicenceCategory currentLicence) {
         this.currentLicence = currentLicence;
     }
 
@@ -53,11 +53,11 @@ public class Candidate extends User{
         this.instructor = instructor;
     }
 
-    public List<CategoryType> getOwnedLicences() {
+    public List<LicenceCategory> getOwnedLicences() {
         return ownedLicences;
     }
 
-    public void setOwnedLicences(List<CategoryType> ownedLicences) {
+    public void setOwnedLicences(List<LicenceCategory> ownedLicences) {
         this.ownedLicences = ownedLicences;
     }
 

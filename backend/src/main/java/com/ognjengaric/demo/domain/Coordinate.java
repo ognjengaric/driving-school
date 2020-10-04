@@ -3,12 +3,12 @@ package com.ognjengaric.demo.domain;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Point {
+public class Coordinate {
 
     private float longitude;
     private float latitude;
 
-    public Point() {
+    public Coordinate() {
     }
 
     public float getLongitude() {

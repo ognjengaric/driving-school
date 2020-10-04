@@ -2,7 +2,7 @@ package com.ognjengaric.demo.domain;
 
 import javax.persistence.*;
 
-import com.ognjengaric.demo.enums.CategoryType;
+import com.ognjengaric.demo.enums.LicenceCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class DrivingSchool {
     private String shortName;
 
     @ElementCollection
-    private List<CategoryType> availableCategories = new ArrayList<>();
+    private List<LicenceCategory> availableCategories = new ArrayList<>();
 
     @OneToMany
     private List<Candidate> candidates = new ArrayList<>();
@@ -57,11 +57,11 @@ public class DrivingSchool {
         this.shortName = shortName;
     }
 
-    public List<CategoryType> getAvailableCategories() {
+    public List<LicenceCategory> getAvailableCategories() {
         return availableCategories;
     }
 
-    public void setAvailableCategories(List<CategoryType> availableCategories) {
+    public void setAvailableCategories(List<LicenceCategory> availableCategories) {
         this.availableCategories = availableCategories;
     }
 

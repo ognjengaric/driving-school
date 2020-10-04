@@ -1,6 +1,6 @@
 package com.ognjengaric.demo.domain;
 
-import com.ognjengaric.demo.enums.CategoryType;
+import com.ognjengaric.demo.enums.LicenceCategory;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
@@ -17,7 +17,7 @@ public class Instructor extends User{
     private List<Candidate> candidates = new ArrayList<>();
 
     @ElementCollection
-    private List<CategoryType> trainableLicences = new ArrayList<>();
+    private List<LicenceCategory> trainableLicences = new ArrayList<>();
 
     @OneToMany
     private List<DrivingClass> classes = new ArrayList<>();
@@ -33,11 +33,11 @@ public class Instructor extends User{
         this.candidates = candidates;
     }
 
-    public List<CategoryType> getTrainableLicences() {
+    public List<LicenceCategory> getTrainableLicences() {
         return trainableLicences;
     }
 
-    public void setTrainableLicences(List<CategoryType> trainableLicences) {
+    public void setTrainableLicences(List<LicenceCategory> trainableLicences) {
         this.trainableLicences = trainableLicences;
     }
 

@@ -1,7 +1,7 @@
 package com.ognjengaric.demo.domain;
 
 import com.ognjengaric.demo.dto.NewRouteDTO;
-import com.ognjengaric.demo.enums.CategoryType;
+import com.ognjengaric.demo.enums.LicenceCategory;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,10 +18,10 @@ public class Route {
     private Integer id;
 
     @Column
-    private CategoryType categoryType;
+    private LicenceCategory categoryType;
 
     @ElementCollection
-    private List<Point> points = new ArrayList<>();
+    private List<Coordinate> coordinates = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "route_streets",
@@ -41,9 +41,9 @@ public class Route {
 
     public Route(NewRouteDTO newRouteDTO){
         this.categoryType = newRouteDTO.getCategory();
-        this.duration = newRouteDTO.getTime();
+        this.duration = newRouteDTO.getDuration();
         this.distance = newRouteDTO.getDistance();
-        this.points = newRouteDTO.getPoints();
+        this.coordinates = newRouteDTO.getCoordinates();
     }
 
     public Integer getId() {
@@ -54,20 +54,20 @@ public class Route {
         this.id = id;
     }
 
-    public CategoryType getCategoryType() {
+    public LicenceCategory getCategoryType() {
         return categoryType;
     }
 
-    public void setCategoryType(CategoryType categoryType) {
+    public void setCategoryType(LicenceCategory categoryType) {
         this.categoryType = categoryType;
     }
 
-    public List<Point> getPoints() {
-        return points;
+    public List<Coordinate> getCoordinates() {
+        return coordinates;
     }
 
-    public void setPoints(List<Point> points) {
-        this.points = points;
+    public void setCoordinates(List<Coordinate> coordinates) {
+        this.coordinates = coordinates;
     }
 
     public Set<Street> getStreets() {
