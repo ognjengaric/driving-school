@@ -3,6 +3,7 @@ import {Microsoft, loadBingApi} from '../bingMapService.ts';
 import {serviceConfig} from '../appSettings.js'
 import {Card, makeStyles} from '@material-ui/core'
 import TrafficRouteForm from './TrafficRouteForm';
+import {AccessTime, DirectionsCar} from '@material-ui/icons';  
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -18,7 +19,7 @@ const BingMap = ({mapOptions}) => {
   const classes = useStyles();
   const [state, setState] = useState({
     routePath: [],
-    time: 0,
+    duration: 0,
     distance: 0,
     streets: []
   })
@@ -56,11 +57,11 @@ const BingMap = ({mapOptions}) => {
   const directionsUpdated = (e) => {
     let route = directionsManager.getCurrentRoute()
     let streets = []
-    let [time, distance] = [0, 0];
+    let [duration, distance] = [0, 0];
 
     route.routeLegs.forEach(leg => {
       distance += leg.summary.distance;
-      time += leg.summary.time;
+      duration += leg.summary.time;
 
       leg.itineraryItems.forEach(action => {
           let street = parseStreet(action.formattedText);
@@ -71,7 +72,7 @@ const BingMap = ({mapOptions}) => {
     
     streets = [...new Set(streets)]    
     
-    setState({time, distance, routePath: route.routePath, streets});
+    setState({duration, distance, coordinates: route.routePath, streets});
   }
 
   const parseStreet = (action) => {   
@@ -91,11 +92,20 @@ const BingMap = ({mapOptions}) => {
     return street;
   }
 
+  const formatDuration = (duration) => {
+      if(duration < 60)
+        return duration + 's'
+      else
+        return `${Math.floor(duration/60)}min ${duration%60 ? duration % 60 + 's' : ''}`;
+  }
+
   return(
     <React.Fragment>
       <div className="directionsContainer">
         <Card className={classes.card} variant="outlined">
           <div id="directionsPanel"></div>
+          {state.duration ? <p><AccessTime/> <div>{formatDuration(state.duration)}</div></p> : null}
+          {state.distance ? <p><DirectionsCar/> <div>{state.distance}km</div></p> : null}
           <TrafficRouteForm routeInfo={state} manager={directionsManager}/>
         </Card>
       </div>  
