@@ -16,7 +16,7 @@ public class StreetController {
     StreetService streetService;
 
     @GetMapping(params = { "page", "size" })
-    public Page<Street> findPaginated(@RequestParam("page") int page, @RequestParam("size") int size){
+    public Page<Street> getPageable(@RequestParam("page") int page, @RequestParam("size") int size){
         return streetService.findPageable(page, size);
     }
 
