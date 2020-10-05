@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import HomePage from './HomePage';
-import { Button, makeStyles, Paper} from '@material-ui/core';
+import { Button, Paper} from '@material-ui/core';
 import { DataGrid} from '@material-ui/data-grid';
 import {serviceConfig} from '../appSettings.js'
 import { Add } from '@material-ui/icons';
 import DrivingSchoolForm from './DrivingSchoolForm';
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        padding: '5%',
-        height: '50%'
-    },
-    datagrid: {
-        width: '75%'
-    }
-}));
-
 const DrivingSchools = () => {
-    const classes = useStyles();
     const rowNumOptions = [5, 10, 25, 100] 
     //const [sortModel, setSortModel] = useState([
       //  {
@@ -89,7 +78,7 @@ const DrivingSchools = () => {
       ];
 
     return(
-        <div style={{display:'flex', justifyContent:'center' }}s>
+        <div style={{display:'flex', justifyContent:'center' }}>
             <HomePage/>
             <div style={{ height: 400, width: '50%', marginTop: '5%'}}>
                 <Paper style={{float:'right', marginBottom:'10px'}}>

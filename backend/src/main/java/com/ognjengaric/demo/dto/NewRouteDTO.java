@@ -1,11 +1,8 @@
 package com.ognjengaric.demo.dto;
 
-import com.ognjengaric.demo.domain.Coordinate;
 import com.ognjengaric.demo.enums.LicenceCategory;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class NewRouteDTO {
@@ -14,7 +11,7 @@ public class NewRouteDTO {
     private int duration;
     private float distance;
     private Set<String> streets = new HashSet<>();
-    private List<Coordinate> coordinates = new ArrayList<>();
+    private String encodedCoordinates;
 
     public NewRouteDTO() {
     }
@@ -51,11 +48,11 @@ public class NewRouteDTO {
         this.streets = streets;
     }
 
-    public List<Coordinate> getCoordinates() {
-        return coordinates;
+    public String getEncodedCoordinates() {
+        return encodedCoordinates;
     }
 
-    public void setCoordinates(List<Coordinate> coordinates) {
-        this.coordinates = coordinates;
+    public void setEncodedCoordinates(String encodedCoordinates) {
+        this.encodedCoordinates = encodedCoordinates;
     }
 }

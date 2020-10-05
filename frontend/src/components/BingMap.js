@@ -59,6 +59,8 @@ const BingMap = ({mapOptions}) => {
     let streets = []
     let [duration, distance] = [0, 0];
 
+    let encodedCoordinates = Microsoft.Maps.PointCompression.encode(route.routePath);
+
     route.routeLegs.forEach(leg => {
       distance += leg.summary.distance;
       duration += leg.summary.time;
@@ -72,7 +74,7 @@ const BingMap = ({mapOptions}) => {
     
     streets = [...new Set(streets)]    
     
-    setState({duration, distance, coordinates: route.routePath, streets});
+    setState({duration, distance, encodedCoordinates, streets});
   }
 
   const parseStreet = (action) => {   

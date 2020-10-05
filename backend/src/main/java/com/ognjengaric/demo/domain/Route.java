@@ -20,8 +20,8 @@ public class Route {
     @Column
     private LicenceCategory categoryType;
 
-    @ElementCollection
-    private List<Coordinate> coordinates = new ArrayList<>();
+    @Column
+    private String encodedCoordinates;
 
     @ManyToMany
     @JoinTable(name = "route_streets",
@@ -43,7 +43,7 @@ public class Route {
         this.categoryType = newRouteDTO.getCategory();
         this.duration = newRouteDTO.getDuration();
         this.distance = newRouteDTO.getDistance();
-        this.coordinates = newRouteDTO.getCoordinates();
+        this.encodedCoordinates = newRouteDTO.getEncodedCoordinates();
     }
 
     public Integer getId() {
@@ -62,12 +62,12 @@ public class Route {
         this.categoryType = categoryType;
     }
 
-    public List<Coordinate> getCoordinates() {
-        return coordinates;
+    public String getEncodedCoordinates() {
+        return encodedCoordinates;
     }
 
-    public void setCoordinates(List<Coordinate> coordinates) {
-        this.coordinates = coordinates;
+    public void setEncodedCoordinates(String encodedCoordinates) {
+        this.encodedCoordinates = encodedCoordinates;
     }
 
     public Set<Street> getStreets() {
