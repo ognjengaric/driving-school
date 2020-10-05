@@ -1,10 +1,12 @@
 package com.ognjengaric.demo.controller;
 
 import com.ognjengaric.demo.domain.Route;
+import com.ognjengaric.demo.domain.Street;
 import com.ognjengaric.demo.dto.NewRouteDTO;
 import com.ognjengaric.demo.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,11 @@ public class RouteController {
 
     @Autowired
     RouteService routeService;
+
+    @GetMapping(params = { "page", "size" })
+    public Page<Route> getPageable(@RequestParam("page") int page, @RequestParam("size") int size){
+        return routeService.getPageable(page, size);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoute(@PathVariable String id){

@@ -7,6 +7,10 @@ import com.ognjengaric.demo.repository.RouteRepository;
 import com.ognjengaric.demo.service.RouteService;
 import com.ognjengaric.demo.service.StreetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -39,5 +43,11 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public Route findById(Integer id){
         return routeRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Page<Route> getPageable(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return routeRepository.findAll(pageable);
     }
 }
