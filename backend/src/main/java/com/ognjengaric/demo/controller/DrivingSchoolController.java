@@ -22,9 +22,14 @@ public class DrivingSchoolController {
     @Autowired
     DrivingSchoolService drivingSchoolService;
 
+//    @GetMapping(params = { "page", "size", "sort", "direction" })
+//    public Page<DrivingSchool> getPageable(@RequestParam("page") int page, @RequestParam("size") int size, @RequestParam("sort") String sort, @RequestParam("direction") String direction){
+//        return drivingSchoolService.getPageable(page, size, sort, direction);
+//    }
+
     @GetMapping(params = { "page", "size" })
     public Page<DrivingSchool> getPageable(@RequestParam("page") int page, @RequestParam("size") int size){
-        return null;
+        return drivingSchoolService.getPageable(page, size);
     }
 
     @GetMapping("/{id}")
