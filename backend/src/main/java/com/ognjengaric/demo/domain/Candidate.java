@@ -26,6 +26,9 @@ public class Candidate extends User{
     @OneToMany
     private List<DrivingClass> classes = new ArrayList<>();
 
+    @ManyToOne
+    private DrivingSchool drivingSchool;
+
     public Candidate() {
     }
 
@@ -67,6 +70,14 @@ public class Candidate extends User{
 
     public void setClasses(List<DrivingClass> classes) {
         this.classes = classes;
+    }
+
+    public DrivingSchool getDrivingSchool() {
+        return drivingSchool;
+    }
+
+    public void setDrivingSchool(DrivingSchool drivingSchool) {
+        this.drivingSchool = drivingSchool;
     }
 
     public void addDrivingClass(DrivingClass drivingClass){

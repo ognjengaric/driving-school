@@ -2,10 +2,7 @@ package com.ognjengaric.demo.domain;
 
 import com.ognjengaric.demo.enums.LicenceCategory;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +18,9 @@ public class Instructor extends User{
 
     @OneToMany
     private List<DrivingClass> classes = new ArrayList<>();
+
+    @ManyToOne
+    private DrivingSchool drivingSchool;
 
     public Instructor() {
     }
@@ -47,6 +47,14 @@ public class Instructor extends User{
 
     public void setClasses(List<DrivingClass> classes) {
         this.classes = classes;
+    }
+
+    public DrivingSchool getDrivingSchool() {
+        return drivingSchool;
+    }
+
+    public void setDrivingSchool(DrivingSchool drivingSchool) {
+        this.drivingSchool = drivingSchool;
     }
 
     public void addCandidate(Candidate candidate){
