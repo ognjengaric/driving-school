@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import HomePage from './HomePage';
-import { makeStyles} from '@material-ui/core';
+import { Button, makeStyles, Paper} from '@material-ui/core';
 import { DataGrid} from '@material-ui/data-grid';
 import {serviceConfig} from '../appSettings.js'
+import { Add } from '@material-ui/icons';
+import DrivingSchoolForm from './DrivingSchoolForm';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -29,11 +31,12 @@ const DrivingSchools = () => {
     const [schools, setSchools] = useState([]);
     const [count, setCount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [showForm, setShowForm] = useState(false);
     
     useEffect(() => {
         fetchSchools();
         // eslint-disable-next-line
-    }, [page, rowsPerPage])
+    }, [page, rowsPerPage, showForm])
 
     const fetchSchools = () => {
         const auth = JSON.parse(localStorage.getItem('auth'));
@@ -75,11 +78,13 @@ const DrivingSchools = () => {
           field: 'instructorNum',
           headerName: 'Number of instructors',
           type: 'number',
+          width: 200
         },
         {
             field: 'candidateNum',
             headerName: 'Number of students',
             type: 'number',
+            width: 200
           }
       ];
 
@@ -87,6 +92,16 @@ const DrivingSchools = () => {
         <div style={{display:'flex', justifyContent:'center' }}s>
             <HomePage/>
             <div style={{ height: 400, width: '50%', marginTop: '5%'}}>
+                <Paper style={{float:'right', marginBottom:'10px'}}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<Add/>}
+                        onClick={e => setShowForm(true)}
+                    >
+                        New 
+                    </Button>
+                </Paper>
                 <DataGrid 
                     rows={schools} 
                     columns={columns}
@@ -103,6 +118,7 @@ const DrivingSchools = () => {
                     loading={loading}
                 />
             </div>
+            <DrivingSchoolForm showDialog={showForm} handleClose={() => setShowForm(false)} showAlert={() => setShowForm(true)}/>
         </div>
     )
 }
