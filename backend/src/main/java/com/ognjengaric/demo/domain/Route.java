@@ -2,6 +2,7 @@ package com.ognjengaric.demo.domain;
 
 import com.ognjengaric.demo.dto.NewRouteDTO;
 import com.ognjengaric.demo.enums.LicenceCategory;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class Route {
     private LicenceCategory categoryType;
 
     @Column
+    @Type(type = "text")
     private String encodedCoordinates;
 
     @ManyToMany
@@ -61,6 +63,7 @@ public class Route {
     public void setCategoryType(LicenceCategory categoryType) {
         this.categoryType = categoryType;
     }
+
 
     public String getEncodedCoordinates() {
         return encodedCoordinates;

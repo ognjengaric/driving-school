@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/route")
@@ -23,13 +24,19 @@ public class RouteController {
     @Autowired
     RouteService routeService;
 
+    @GetMapping
+    public ResponseEntity<?> getAll(){
+        List<Route> routes = routeService.findAll();
+        return ResponseEntity.ok(routes);
+    }
+
     @GetMapping(params = { "page", "size" })
     public Page<Route> getPageable(@RequestParam("page") int page, @RequestParam("size") int size){
         return routeService.getPageable(page, size);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getRoute(@PathVariable String id){
+    public ResponseEntity<?> get(@PathVariable String id){
         Route route = routeService.findById(Integer.parseInt(id));
 
         if(route == null)
@@ -40,7 +47,7 @@ public class RouteController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> postRoute(@RequestBody NewRouteDTO newRouteDTO){
+    public ResponseEntity<?> post(@RequestBody NewRouteDTO newRouteDTO){
         Integer id = routeService.save(newRouteDTO);
 
         URI uri = URI.create(backendUri + "/route/" + id);
