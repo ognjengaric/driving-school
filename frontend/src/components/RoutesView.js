@@ -81,8 +81,8 @@ const RoutesView = () => {
 
     const initMap = () => {
         const map = new Microsoft.Maps.Map(mapRef.current);
-    
-        drawRoute(map);
+        if(routes.length !== 0)
+            drawRoute(map);
         return map;
     }
 

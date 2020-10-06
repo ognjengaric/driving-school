@@ -73,6 +73,7 @@ const TrafficRouteForm = ({routeInfo}) => {
                 return Promise.reject(response);
             }
             setShow(true);
+            history.push('/routes')
         })
     }
 
