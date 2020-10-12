@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Drawer, List, ListItem, ListItemText, ListItemIcon} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import {SchoolRounded, AccountBoxRounded, DirectionsCarRounded, TrafficRounded, CalendarTodayRounded, BookRounded, ScheduleRounded, AssessmentRounded} from '@material-ui/icons';
-import AlertDialog from './AlertDialog';
-import DrivingSchoolForm from './DrivingSchoolForm';
 import CustomAlert from './CustomAlert';
 import {useHistory} from "react-router";
 
@@ -20,8 +18,6 @@ const Sidebar = ({open, handleChange}) => {
     const anchor = "left";
     const classes = useStyles();
     const [displayList, setDisplayList] = useState([]);
-    const [show, setShow] = useState(false);
-    const [showForm, setShowForm] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
     let history = useHistory();
@@ -53,11 +49,6 @@ const Sidebar = ({open, handleChange}) => {
         history.push(`/${path}`);
     }
 
-    const handleAgree = () => {
-      setShowForm(true);
-      setShow(false);
-    }
-
     const list = () => (
         <div
           className={classes.list}
@@ -79,8 +70,6 @@ const Sidebar = ({open, handleChange}) => {
           <Drawer open={open} variant="temporary" anchor={anchor} onClose={(e) => handleChange(e, false)}>
             {list(anchor)}
           </Drawer>
-          <AlertDialog show={show} handleDisagree={() => setShow(false)} handleAgree={handleAgree}/>
-          <DrivingSchoolForm showDialog={showForm} handleClose={() => setShowForm(false)} showAlert={() => setShowForm(true)}/>
           <CustomAlert severity={'success'} message={"Successfully added!"} show={showAlert} handleClose={() => setShowAlert(false)}/>
         </div>
     );

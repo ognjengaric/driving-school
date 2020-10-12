@@ -50,7 +50,13 @@ public class DrivingClassServiceImpl implements DrivingClassService {
         DateTime start = DateTime.parse(appointmentDTO.getStartDate());
         DateTime end =  DateTime.parse(appointmentDTO.getEndDate());
 
-        DrivingClass drivingClass = drivingClassRepository.saveAndFlush(new DrivingClass(candidate, instructor, start, end));
+        DrivingClass drivingClass = new DrivingClass(start, end);
+
+        candidate.addDrivingClass(drivingClass);
+        instructor.addDrivingClass(drivingClass);
+        candidate.getDrivingSchool().addDrivingClass(drivingClass);
+
+        drivingClass = drivingClassRepository.saveAndFlush(drivingClass);
 
         return drivingClass.getId();
     }

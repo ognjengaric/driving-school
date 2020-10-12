@@ -88,4 +88,35 @@ public class DrivingSchool {
     public void setClasses(List<DrivingClass> classes) {
         this.classes = classes;
     }
+
+    public void addCandidate(Candidate candidate){
+        this.candidates.add(candidate);
+        candidate.setDrivingSchool(this);
+    }
+
+    public void removeCandidate(Candidate candidate){
+        this.candidates.remove(candidate);
+        candidate.setDrivingSchool(null);
+    }
+
+    public void addInstructor(Instructor instructor){
+        this.instructors.add(instructor);
+        instructor.setDrivingSchool(this);
+    }
+
+    public void removeInstructor(Instructor instructor){
+        this.instructors.remove(instructor);
+        instructor.setDrivingSchool(null);
+    }
+
+    public void addDrivingClass(DrivingClass drivingClass){
+        this.classes.add(drivingClass);
+        drivingClass.setDrivingSchool(this);
+    }
+
+
+    public void removeDrivingClass(DrivingClass drivingClass){
+        this.classes.remove(drivingClass);
+        drivingClass.setDrivingSchool(null);
+    }
 }

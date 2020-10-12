@@ -17,6 +17,9 @@ public class DrivingClass {
     @ManyToOne
     private Instructor instructor;
 
+    @ManyToOne
+    private DrivingSchool drivingSchool;
+
     @Column
     private ClassStatusType status;
 
@@ -45,10 +48,8 @@ public class DrivingClass {
         this.status = ClassStatusType.PENDING;
     }
 
-    public DrivingClass(Candidate candidate, Instructor instructor, DateTime startDt, DateTime endDt) {
+    public DrivingClass(DateTime startDt, DateTime endDt) {
         this.status = ClassStatusType.PENDING;
-        this.candidate = candidate;
-        this.instructor = instructor;
         this.startDt = startDt;
         this.endDt = endDt;
     }
@@ -75,6 +76,14 @@ public class DrivingClass {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
+    }
+
+    public DrivingSchool getDrivingSchool() {
+        return drivingSchool;
+    }
+
+    public void setDrivingSchool(DrivingSchool drivingSchool) {
+        this.drivingSchool = drivingSchool;
     }
 
     public ClassStatusType getStatus() {
