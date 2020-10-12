@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue(value = "I")
+@PrimaryKeyJoinColumn(name="id")
 public class Instructor extends User{
 
     @OneToMany(mappedBy = "instructor")
@@ -75,5 +75,12 @@ public class Instructor extends User{
     public void removeDrivingClass(DrivingClass drivingClass){
         this.classes.remove(drivingClass);
         drivingClass.setInstructor(null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Instructor )) return false;
+        return super.getId() != null && super.getId().equals(((Instructor) o).getId());
     }
 }

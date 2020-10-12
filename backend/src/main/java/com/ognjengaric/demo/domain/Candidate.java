@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue(value = "C")
+@PrimaryKeyJoinColumn(name="id")
 public class Candidate extends User{
 
 
