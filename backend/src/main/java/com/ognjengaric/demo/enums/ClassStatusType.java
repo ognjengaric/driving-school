@@ -1,5 +1,5 @@
 package com.ognjengaric.demo.enums;
 
 public enum ClassStatusType {
-    PENDING, DENIED, APPROVED, STARTED, FINISHED
+    PENDING, DENIED, APPROVED, FINISHED
 }

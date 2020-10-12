@@ -10,8 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "usr")
-@Inheritance
-@DiscriminatorValue(value = "A")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
 
     @Id

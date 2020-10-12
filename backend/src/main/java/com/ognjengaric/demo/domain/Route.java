@@ -5,10 +5,8 @@ import com.ognjengaric.demo.enums.LicenceCategory;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,7 +17,7 @@ public class Route {
     private Integer id;
 
     @Column
-    private LicenceCategory categoryType;
+    private LicenceCategory category;
 
     @Column
     @Type(type = "text")
@@ -42,7 +40,7 @@ public class Route {
     }
 
     public Route(NewRouteDTO newRouteDTO){
-        this.categoryType = newRouteDTO.getCategory();
+        this.category = newRouteDTO.getCategory();
         this.duration = newRouteDTO.getDuration();
         this.distance = newRouteDTO.getDistance();
         this.encodedCoordinates = newRouteDTO.getEncodedCoordinates();
@@ -56,14 +54,13 @@ public class Route {
         this.id = id;
     }
 
-    public LicenceCategory getCategoryType() {
-        return categoryType;
+    public LicenceCategory getCategory() {
+        return category;
     }
 
-    public void setCategoryType(LicenceCategory categoryType) {
-        this.categoryType = categoryType;
+    public void setCategory(LicenceCategory category) {
+        this.category = category;
     }
-
 
     public String getEncodedCoordinates() {
         return encodedCoordinates;

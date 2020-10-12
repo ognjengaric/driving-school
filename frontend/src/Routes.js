@@ -7,6 +7,8 @@ import Streets from './components/Streets'
 import SchedulingCalender from './components/SchedulingCalendar'
 import DrivingSchools from './components/DrivingSchools'
 import TrafficRoute from './components/TrafficRoutes'
+import DrivingClasses from './components/DrivingClasses'
+import ClassDetails from './components/ClassDetails'
 
 
 
@@ -20,6 +22,8 @@ const Routes = () => {
             <Route path="/schedule" component={SchedulingCalender}/>
             <Route path="/driving-school" component={DrivingSchools}/>
             <Route path="/new-route" component={TrafficRoute}/>
+            <Route path="/classes" component={DrivingClasses}/>
+            <Route path="/class/:id" component={ClassDetails}/>
         </Switch>
     );
 }
