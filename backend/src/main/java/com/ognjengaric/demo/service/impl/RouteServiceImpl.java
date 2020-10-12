@@ -43,7 +43,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public List<Route> findByCategory(LicenceCategory category) {
-        return routeRepository.findByCategoryType(category);
+        return routeRepository.findByCategory(category);
     }
 
     @Override
