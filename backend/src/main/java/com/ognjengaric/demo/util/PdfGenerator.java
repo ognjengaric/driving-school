@@ -126,7 +126,7 @@ public class PdfGenerator {
 
             routes.forEach(route -> {
                 String id = route.getId().toString();
-                String category = route.getCategoryType().toString();
+                String category = route.getCategory().toString();
                 String time =   route.getDuration()/60 + "min";
                 String distance = Float.toString(route.getDistance());
 
