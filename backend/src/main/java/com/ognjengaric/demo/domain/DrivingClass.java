@@ -1,5 +1,6 @@
 package com.ognjengaric.demo.domain;
 
+import com.ognjengaric.demo.dto.ClassTableViewDto;
 import com.ognjengaric.demo.enums.ClassStatusType;
 import org.joda.time.DateTime;
 
@@ -31,12 +32,6 @@ public class DrivingClass {
 
     @Column
     private DateTime endDt;
-
-    @Column
-    private DateTime actualStartDt;
-
-    @Column
-    private DateTime actualEndDt;
 
     @Column
     private Boolean isOnDrivingRange;
@@ -118,22 +113,6 @@ public class DrivingClass {
         this.endDt = endDt;
     }
 
-    public DateTime getActualStartDt() {
-        return actualStartDt;
-    }
-
-    public void setActualStartDt(DateTime actualStartDt) {
-        this.actualStartDt = actualStartDt;
-    }
-
-    public DateTime getActualEndDt() {
-        return actualEndDt;
-    }
-
-    public void setActualEndDt(DateTime actualEndDt) {
-        this.actualEndDt = actualEndDt;
-    }
-
     public Boolean getOnDrivingRange() {
         return isOnDrivingRange;
     }
@@ -148,5 +127,13 @@ public class DrivingClass {
 
     public void setWithLoad(Boolean withLoad) {
         isWithLoad = withLoad;
+    }
+
+    public void completeClass(ClassTableViewDto dto){
+        this.setStatus(dto.getStatus());
+        this.setRoute(dto.getRoute());
+        this.setOnDrivingRange(dto.getIsOnDrivingRange());
+        if(dto.getIsWithLoad() != null)
+            this.setWithLoad(dto.getIsWithLoad());
     }
 }
