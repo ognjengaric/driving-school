@@ -3,6 +3,7 @@ package com.ognjengaric.demo.service.impl;
 import com.ognjengaric.demo.domain.Route;
 import com.ognjengaric.demo.domain.Street;
 import com.ognjengaric.demo.dto.NewRouteDTO;
+import com.ognjengaric.demo.enums.LicenceCategory;
 import com.ognjengaric.demo.repository.RouteRepository;
 import com.ognjengaric.demo.service.RouteService;
 import com.ognjengaric.demo.service.StreetService;
@@ -38,6 +39,11 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public List<Route> findAll() {
         return routeRepository.findAll();
+    }
+
+    @Override
+    public List<Route> findByCategory(LicenceCategory category) {
+        return routeRepository.findByCategoryType(category);
     }
 
     @Override

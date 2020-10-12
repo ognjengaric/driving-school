@@ -3,6 +3,7 @@ package com.ognjengaric.demo.controller;
 import com.ognjengaric.demo.domain.Route;
 import com.ognjengaric.demo.domain.Street;
 import com.ognjengaric.demo.dto.NewRouteDTO;
+import com.ognjengaric.demo.enums.LicenceCategory;
 import com.ognjengaric.demo.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,24 @@ public class RouteController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(route);
+    }
+
+    @GetMapping(params = { "category"})
+    public ResponseEntity<?> getByCategory(@RequestParam("category") String category){
+        LicenceCategory val;
+
+        try {
+            val = LicenceCategory.valueOf(category);
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<Route> routes = routeService.findByCategory(val);
+
+        if(routes == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(routes);
     }
 
     @PostMapping
