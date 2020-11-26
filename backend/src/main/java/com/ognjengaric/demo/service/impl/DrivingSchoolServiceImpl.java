@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class DrivingSchoolServiceImpl implements DrivingSchoolService {
@@ -24,6 +25,11 @@ public class DrivingSchoolServiceImpl implements DrivingSchoolService {
     @Override
     public DrivingSchool findById(String id) {
         return drivingSchoolRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<DrivingSchool> get() {
+        return drivingSchoolRepository.findAll();
     }
 
     @Override

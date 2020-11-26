@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Button, Dialog, AppBar, Toolbar, Typography, Slide, IconButton, Grid, TextField, FormControl, FormControlLabel, Checkbox, FormLabel, FormGroup} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
@@ -25,7 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function FullScreenDialog({showDialog, handleClose, showAlert}) {
-  const categories = ['AM', 'A1', 'A2', 'A', 'B1', 'B', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'F', 'M'];
+  const [categories, setCategories] = useState([]);
   const classes = useStyles();
   const [state, setState] = useState({
     name: "", 
@@ -33,6 +33,30 @@ export default function FullScreenDialog({showDialog, handleClose, showAlert}) {
     id: ""
   })
   const [checks, setChecks] = useState({});
+
+  useEffect(() => {
+    fetchCategories();
+}, [])
+
+  const fetchCategories = () => {
+
+    const auth = JSON.parse(localStorage.getItem('auth'));
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${auth.token}` 
+        }
+    }
+
+    fetch(`${serviceConfig.baseURL}/licence`, requestOptions)
+    .then(response => {
+        if (!response.ok) {
+            return Promise.reject(response);
+        } 
+        return response.json()
+    })
+    .then(data => setCategories(data))
+}
 
 
   const handleCheck = (event) => {
@@ -80,7 +104,7 @@ export default function FullScreenDialog({showDialog, handleClose, showAlert}) {
         handleClose();
     })
     .catch(response => {
-      console.log(response);
+      setChecks([]);
     })
   }
 

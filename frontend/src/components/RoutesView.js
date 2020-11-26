@@ -74,7 +74,7 @@ const RoutesView = () => {
                 <Typography color="textSecondary">#{el.id}</Typography>
                 <div style={{display: 'flex', alignItems:'center'}}><AccessTime/><span>{formatDuration(el.duration)}</span></div>
                 <div style={{display: 'flex', alignItems:'center'}}><DirectionsCar/> <span>{el.distance}km</span></div>
-                <div style={{display: 'flex', alignItems:'center'}}><Note/> <span>{el.categoryType}</span></div>
+                <div style={{display: 'flex', alignItems:'center'}}><Note/> <span>{el.category}</span></div>
             </ListItem>
         )
     }

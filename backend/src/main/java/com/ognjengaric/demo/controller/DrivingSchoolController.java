@@ -27,7 +27,12 @@ public class DrivingSchoolController {
 //        return drivingSchoolService.getPageable(page, size, sort, direction);
 //    }
 
-    @GetMapping(params = { "page", "size" })
+    @GetMapping
+    public ResponseEntity<?> get() {
+        return ResponseEntity.ok(drivingSchoolService.get());
+    }
+
+        @GetMapping(params = { "page", "size" })
     public Page<DrivingSchool> getPageable(@RequestParam("page") int page, @RequestParam("size") int size){
         return drivingSchoolService.getPageable(page, size);
     }
