@@ -60,7 +60,7 @@ public class DrivingClassServiceImpl implements DrivingClassService {
     }
 
     @Override
-    public Integer save(AppointmentDTO appointmentDTO, String user_id) {
+    public Integer save(AppointmentDTO appointmentDTO, Integer user_id) {
         User user = userService.findById(user_id);
         Candidate candidate;
         Instructor instructor;
@@ -87,7 +87,7 @@ public class DrivingClassServiceImpl implements DrivingClassService {
     }
 
     @Override
-    public List<AppointmentDTO> getClassesForUserScheduler(String user_id){
+    public List<AppointmentDTO> getClassesForUserScheduler(Integer user_id){
         User user = userService.findById(user_id);
         Instructor instructor;
 
@@ -104,7 +104,7 @@ public class DrivingClassServiceImpl implements DrivingClassService {
     }
 
     @Override
-    public Page<ClassTableViewDto> getMyClasses(String id, int page, int size) {
+    public Page<ClassTableViewDto> getMyClasses(Integer id, int page, int size) {
         User user = userService.findById(id);
         Page<DrivingClass> ret;
 

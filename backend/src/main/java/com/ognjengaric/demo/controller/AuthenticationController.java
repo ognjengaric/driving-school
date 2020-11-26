@@ -46,7 +46,7 @@ public class AuthenticationController {
         if(user == null)
             return ResponseEntity.badRequest().build();
 
-        String jwt = tokenUtils.generateToken(user.getId());
+        String jwt = tokenUtils.generateToken(user.getId().toString());
         String role = ((Role)user.getAuthorities().toArray()[0]).getAuthority();
 
         return ResponseEntity.ok(new TokenRoleDTO(jwt, role));

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ClassDetails = () => {
 
-    const message = 'You have to choose a route!';
+    const message = 'You have to choose a route or check driving range!';
 
     let { id } = useParams();
     const classes = useStyles();
@@ -33,7 +33,7 @@ const ClassDetails = () => {
     });
     const [map, setMap] = useState('');
     const [show, setShow] = useState(false);
-    const [selected, setSelected] = useState('');
+    const [selected, setSelected] = useState(null);
     const [checks, setChecks] = useState({
         range: false, 
         load: false,
@@ -194,7 +194,7 @@ const ClassDetails = () => {
     }
 
     const handleComplete = () => {
-        if(selected === ''){
+        if(selected === null && !checks.range){
             setShow(true);
             return
         }
@@ -212,11 +212,13 @@ const ClassDetails = () => {
         }
         
         setChecks({load : data.isWithLoad, range: data.isOnDrivingRange});
-
-        let array = routes.filter(el => el.id === data.route.id)
-        setSelected(array[0]);
-        if(map && array[0])
-            drawRoute(array[0]);
+        
+        if(data.route !== null){
+            let array = routes.filter(el => el.id === data.route.id)
+            setSelected(array[0]);
+            if(map && array[0])
+                drawRoute(array[0]);
+        }
 
     }
 
@@ -284,7 +286,7 @@ const ClassDetails = () => {
                                 </Select>
                             </FormControl>
                         </Grid>
-                        {selected !== '' && selected !== undefined &&
+                        {selected !== null && selected !== undefined &&
                         <Grid item xs>
                             {selected.duration ? <p><AccessTime/> <div>{formatDuration(selected.duration)}</div></p> : null}
                             {selected.distance ? <p><DirectionsCar/> <div>{selected.distance}km</div></p> : null}

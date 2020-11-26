@@ -131,7 +131,8 @@ public class DrivingClass {
 
     public void completeClass(ClassTableViewDto dto){
         this.setStatus(dto.getStatus());
-        this.setRoute(dto.getRoute());
+        if(dto.getRoute() != null)
+            this.setRoute(dto.getRoute());
         this.setOnDrivingRange(dto.getIsOnDrivingRange());
         if(dto.getIsWithLoad() != null)
             this.setWithLoad(dto.getIsWithLoad());

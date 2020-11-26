@@ -1,5 +1,7 @@
 package com.ognjengaric.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ognjengaric.demo.dto.NewUserDTO;
 import com.ognjengaric.demo.enums.LicenceCategory;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name="id")
 public class Instructor extends User{
 
+    @JsonIgnore
     @OneToMany(mappedBy = "instructor")
     private List<Candidate> candidates = new ArrayList<>();
 
@@ -20,9 +23,16 @@ public class Instructor extends User{
     private List<DrivingClass> classes = new ArrayList<>();
 
     @ManyToOne
+    @JsonIgnore
     private DrivingSchool drivingSchool;
 
     public Instructor() {
+    }
+
+    public Instructor(NewUserDTO dto, DrivingSchool school) {
+        super(dto.getName(), dto.getSurname(), dto.getPassword());
+        this.trainableLicences = dto.getLicences();
+        this.drivingSchool = school;
     }
 
     public List<Candidate> getCandidates() {

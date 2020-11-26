@@ -1,5 +1,6 @@
 package com.ognjengaric.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,7 +15,8 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column
     private String name;
@@ -23,6 +25,7 @@ public class User implements UserDetails {
     private String surname;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @Column
@@ -32,18 +35,32 @@ public class User implements UserDetails {
     private  Timestamp lastPasswordResetDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();;
 
     public User() {
-        this.roles = new ArrayList<>();
+
     }
 
-    public String getId() {
+    public User(String name, String surname, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public String getName() {
@@ -93,7 +110,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return id;
+        return id.toString();
     }
 
     @Override

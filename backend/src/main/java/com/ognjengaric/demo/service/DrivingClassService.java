@@ -16,12 +16,12 @@ public interface DrivingClassService {
     List<DrivingClass> findByCandidate(Candidate candidate);
     Page<DrivingClass> findByInstructor(Instructor instructor, Pageable pageable);
     Page<DrivingClass> findByCandidate(Candidate candidate, Pageable pageable);
-    Integer save(AppointmentDTO appointmentDTO, String user_id);
+    Integer save(AppointmentDTO appointmentDTO, Integer user_id);
     ClassTableViewDto findById(Integer id);
     List<DrivingClass> findAll();
     boolean setStatus(Integer id, ClassStatusType status);
     boolean completeClass(ClassTableViewDto dto);
 
-    List<AppointmentDTO> getClassesForUserScheduler(String user_id);
-    Page<ClassTableViewDto> getMyClasses(String id, int page, int size);
+    List<AppointmentDTO> getClassesForUserScheduler(Integer user_id);
+    Page<ClassTableViewDto> getMyClasses(Integer id, int page, int size);
 }

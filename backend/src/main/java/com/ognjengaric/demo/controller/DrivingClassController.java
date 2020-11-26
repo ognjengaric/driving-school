@@ -36,7 +36,7 @@ public class DrivingClassController {
 
     @PostMapping
     public ResponseEntity<?> postNewClass(@RequestBody AppointmentDTO appointmentDTO, Principal principal){
-        Integer id = drivingClassService.save(appointmentDTO, principal.getName());
+        Integer id = drivingClassService.save(appointmentDTO, Integer.parseInt(principal.getName()));
         if(id == null)
             return ResponseEntity.badRequest().build();
 
@@ -47,7 +47,7 @@ public class DrivingClassController {
 
     @GetMapping(path = "/my", params = { "page", "size" })
     public ResponseEntity<?> getUserClassesPageable(Principal principal, @RequestParam("page") int page, @RequestParam("size") int size){
-        Page<ClassTableViewDto> list = drivingClassService.getMyClasses(principal.getName(), page, size);
+        Page<ClassTableViewDto> list = drivingClassService.getMyClasses(Integer.parseInt(principal.getName()), page, size);
 
         if(list == null)
             return ResponseEntity.badRequest().build();
@@ -58,7 +58,7 @@ public class DrivingClassController {
     @GetMapping("/appointments")
     public ResponseEntity<?> getClassesForUserScheduler(Principal principal){
 
-        List<AppointmentDTO> drivingClasses = drivingClassService.getClassesForUserScheduler(principal.getName());
+        List<AppointmentDTO> drivingClasses = drivingClassService.getClassesForUserScheduler(Integer.parseInt(principal.getName()));
 
         if(drivingClasses == null)
             return ResponseEntity.badRequest().build();
